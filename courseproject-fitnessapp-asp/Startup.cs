@@ -58,7 +58,7 @@ namespace courseproject_fitnessapp_asp
             app.UseDeveloperExceptionPage();
             
 
-            app.UseStaticFiles();
+            app.UseStaticFiles();  
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
