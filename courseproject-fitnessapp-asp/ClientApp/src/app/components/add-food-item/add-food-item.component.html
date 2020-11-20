@@ -1,0 +1,40 @@
+﻿<md-card>
+    <md-card-content>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+            <mat-label>Продукт</mat-label>
+            <input [ngModel()]="newitem" name="newitem" matInput placeholder="Ex. Pizza" value="Sushi">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Тип</mat-label>
+                <mat-select placeholder="Select">
+                <mat-option value="option">Овощи</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field class="example-full-width">
+            <mat-label>Белки</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Жиры</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+            
+            <mat-form-field class="example-full-width">
+                <mat-label>Углеводы</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Ккал</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+            </mat-form-field>
+        </form>
+    </md-card-content>  
+    <md-card-actions>
+        <button (click)="add_food_item(newitem)"md-button>Add</button>
+    </md-card-actions>
+</md-card>

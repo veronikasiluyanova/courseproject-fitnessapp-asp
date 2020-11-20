@@ -42,11 +42,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <None Remove="ClientApp\src\app\fooditem.ts" />
     <None Remove="ClientApp\src\app\services\food.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\fooditem.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\food.service.ts" />
   </ItemGroup>

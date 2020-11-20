@@ -18,13 +18,14 @@ export class FoodService {
     return this.http.get(this.url + '/' + id);
   }
 
-  createFoodItem(product: FoodItem) {
-    return this.http.post(this.url, product);
+  createFoodItem(newitem: FoodItem) {
+    return this.http.post(this.url, newitem);
   }
-  updateFoodItem(product: FoodItem) {
 
-    return this.http.put(this.url, product);
+  updateFoodItem(item: FoodItem) {
+    return this.http.put(this.url, item);
   }
+
   deleteFoodItem(id: number) {
     return this.http.delete(this.url + '/' + id);
   }

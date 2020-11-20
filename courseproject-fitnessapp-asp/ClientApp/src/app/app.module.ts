@@ -7,25 +7,31 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
-import { FoodService } from './services/food.service';
 import { FoodComponent } from './components/food/food.component';
+import { AddFoodItemComponent } from './components/add-food-item/add-food-item.component';
+
+import { FoodService } from './services/food.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    FoodComponent
+    FoodComponent,
+    AddFoodItemComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
     ]),
-    BrowserAnimationsModule
+    MatTableModule, MatCardModule
   ],
   providers: [FoodService],
   bootstrap: [AppComponent]
