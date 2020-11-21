@@ -15,6 +15,10 @@ import { FoodService } from './services/food.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -30,8 +34,10 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'add-food-item', component: AddFoodItemComponent }
+      
     ]),
-    MatTableModule, MatCardModule
+    MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule
   ],
   providers: [FoodService],
   bootstrap: [AppComponent]

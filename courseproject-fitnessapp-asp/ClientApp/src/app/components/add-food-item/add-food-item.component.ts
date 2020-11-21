@@ -1,8 +1,9 @@
-﻿import {Component} from '@angular/core'
+import {Component} from '@angular/core'
 
 @Component({
-    selector: 'add-food-item',
-    templateUrl: './add-food-item.component.html'
+    selector: 'app-components-add-food-item',
+    templateUrl: './add-food-item.component.html',
+    styleUrls: ['./add-food-item.component.css']
 })
 export class AddFoodItemComponent {
     add_food_item(newitem){

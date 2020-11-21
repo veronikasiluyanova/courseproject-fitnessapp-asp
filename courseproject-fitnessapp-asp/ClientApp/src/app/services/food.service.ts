@@ -5,7 +5,7 @@ import { FoodItem } from '../fooditem';
 @Injectable()
 export class FoodService {
 
-  private url = "/api/FoodItems";
+  private url = "/api/food-info";
 
   constructor(private http: HttpClient) {
   }
