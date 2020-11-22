@@ -1,41 +1,49 @@
-<mat-card>
+<div class="add-food-item">
+  <mat-card>
     <mat-card-content>
-        <form class="example-form">
-          <mat-form-field class="example-full-width">
-            <mat-label>Продукт</mat-label> <!--[ngModel()]="newitem" name="newitem"-->
-            <input matInput placeholder="Ex. Pizza" value="Sushi" />
+      <form>
+        <!--[formGroup]="addFoodItemForm" (ngSubmit)="onSubmit()" formControlName="name"-->
+        <div>
+          <mat-form-field class="example-full-width form-group">
+            <mat-label class="required">Продукт</mat-label>
+            <input matInput id="name" placeholder="Название продукта" type="text" [(ngModel)]="newfooditem.name" name="name" />
           </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Тип</mat-label>
-                <mat-select placeholder="Select">
-                  <mat-option value="option">Овощи</mat-option>
-                </mat-select>
-            </mat-form-field>
+          <mat-form-field class=" form-group">
+            <mat-label class="required">Тип</mat-label>
+            <mat-select id="food_type_id" placeholder="Тип" [(ngModel)]="newfooditem.food_type_id" name="food_type_id" >
+              <mat-option value="1">Овощи</mat-option>
+              <mat-option value="2">Фрукты</mat-option>
+              <mat-option value="3">Молочные продукты</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="example-full-width form-group">
+            <mat-label class="required">Белки</mat-label>
+            <input matInput id="protein" placeholder="Белки" type="text" [(ngModel)]="newfooditem.protein" name="protein" />
+          </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>Белки</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
+          <mat-form-field class="example-full-width form-group">
+            <mat-label class="required">Жиры</mat-label>
+            <input matInput id="fats" placeholder="Жиры" type="text" [(ngModel)]="newfooditem.fats" name="fats" />
+          </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>Жиры</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
+          <mat-form-field class="example-full-width form-group">
+            <mat-label class="required">Углеводы</mat-label>
+            <input matInput id="carbs" placeholder="Углеводы" type="text" [(ngModel)]="newfooditem.carbs" name="carbs" />
+          </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>Углеводы</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                <mat-label>Ккал</mat-label>
-                <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-            </mat-form-field>
-        </form>
+          <mat-form-field class="example-full-width form-group">
+            <mat-label class="required">Ккал</mat-label>
+            <input matInput id="kcal" placeholder="Ккал" type="text" [(ngModel)]="newfooditem.kcal" name="kcal" />
+          </mat-form-field>
+        </div>
+      </form>
     </mat-card-content>
     <mat-card-actions>
-      <!--(click)="add_food_item(newitem)"-->
-      <button mat-button>Add</button>
+      <button mat-raised-button color="primary" (click)="addFoodItemClick()" type="submit">Добавить</button>
+      <button mat-stroked-button [routerLink]="['/food-info']">Отмена</button>
     </mat-card-actions>
-</mat-card>
+  </mat-card>
+</div>

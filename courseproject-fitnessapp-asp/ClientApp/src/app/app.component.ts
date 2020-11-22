@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {FoodComponent} from './components/food/food.component';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +6,6 @@ import {FoodComponent} from './components/food/food.component';
   //styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'courseproject-asp';
+  title = 'FitnessApp';
 }
 

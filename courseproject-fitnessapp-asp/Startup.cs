@@ -27,6 +27,9 @@ namespace courseproject_fitnessapp_asp
         {
             _connectionString = "Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;"; //Configuration["DefaultConnection"];
 
+            services.AddCors(options => options.AddPolicy("Cors", builder => {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -35,13 +38,13 @@ namespace courseproject_fitnessapp_asp
             });
 
             services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(_connectionString));
-           // services.AddTransient<IFoodService, FoodService>();
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("Cors");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

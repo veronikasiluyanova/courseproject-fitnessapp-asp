@@ -3,11 +3,6 @@
 body {
 }
 
-.add-food-item {
-
-}
-
-.required:after {
-    content: "*";
-    color: red;     
+table {
+    width: 100%;
 }

@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FoodItem } from '../fooditem';
 
 @Injectable()
 export class FoodService {
 
-  private url = "/api/food-info";
+  private url = "api/FoodItems";
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string) { }
 
   getFoodItems() {
-    return this.http.get(this.url);
+    return this.http.get<FoodItem[]>(this.url + '/');
   }
 
   getFoodItem(id: number) {
@@ -19,7 +19,7 @@ export class FoodService {
   }
 
   createFoodItem(newitem: FoodItem) {
-    return this.http.post(this.url, newitem);
+    return this.http.post(this.baseUrl + this.url, newitem);
   }
 
   updateFoodItem(item: FoodItem) {
