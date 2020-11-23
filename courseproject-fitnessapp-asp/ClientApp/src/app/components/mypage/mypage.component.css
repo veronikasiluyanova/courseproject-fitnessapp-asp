@@ -1,2 +1,15 @@
-﻿body {
+body {
+}
+
+.mainInfo {
+  display: flex;
+  align-items: center;
+}
+
+.infoCard {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 40%;
+  margin: auto;
 }

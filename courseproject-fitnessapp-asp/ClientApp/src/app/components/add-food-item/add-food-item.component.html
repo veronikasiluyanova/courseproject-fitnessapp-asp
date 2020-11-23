@@ -11,10 +11,8 @@
 
           <mat-form-field class=" form-group">
             <mat-label class="required">Тип</mat-label>
-            <mat-select id="food_type_id" placeholder="Тип" [(ngModel)]="newfooditem.food_type_id" name="food_type_id" >
-              <mat-option value="1">Овощи</mat-option>
-              <mat-option value="2">Фрукты</mat-option>
-              <mat-option value="3">Молочные продукты</mat-option>
+            <mat-select id="food_type_id" placeholder="Тип" [(ngModel)]="newfooditem.food_type_id" name="food_type_id" (change)="changeType($event.value)">
+              <mat-option *ngFor="let t of foodTypes" [value]="t.id">{{t.food_type}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>

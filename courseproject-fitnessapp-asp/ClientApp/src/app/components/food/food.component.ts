@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { FoodItem } from '../../fooditem'
 import { FoodService } from '../../services/food.service'
+import { FoodItem } from '../../models/fooditem'
+import { FoodType } from '../../models/foodtype'
+import { FoodTypeService } from '../../services/foodtype.service'
 
 @Component({
     selector: 'app-components-food',
@@ -9,15 +11,24 @@ import { FoodService } from '../../services/food.service'
 })
 export class FoodComponent implements OnInit {
   public allFood: FoodItem[]
+  public foodTypes: FoodType[]
+  public typeNames: string[]
 
-  constructor(private foodService: FoodService) { }
+  displayedColumns: string[] = ['name', 'food_type_id', 'protein', 'fats', 'carbs', 'kcal']
+
+  constructor(private foodService: FoodService,
+    private foodtypeService: FoodTypeService) { }
 
   ngOnInit() {
     this.foodService.getFoodItems().subscribe(data => {
       this.allFood = data
     })
+    this.foodtypeService.getFoodTypes().subscribe(data => {
+      this.foodTypes = data
+    })
+    for (let t of Object.keys(this.foodTypes)) {
+      this.typeNames.push(this.foodTypes[t].food_type)
+    }
   }
 
-  foodTypes = { 1: 'Овощи', 2: 'Фрукты', 3: 'Молочные продукты' }
-  displayedColumns: string[] = ['name', 'food_type_id', 'protein', 'fats', 'carbs', 'kcal']
 }

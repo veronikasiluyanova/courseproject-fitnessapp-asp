@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FoodItem } from '../fooditem';
+import { FoodItem } from '../models/fooditem';
 
 @Injectable()
 export class FoodService {
@@ -19,7 +19,7 @@ export class FoodService {
   }
 
   createFoodItem(newitem: FoodItem) {
-    return this.http.post(this.baseUrl + this.url, newitem);
+    return this.http.post(this.url, newitem);
   }
 
   updateFoodItem(item: FoodItem) {

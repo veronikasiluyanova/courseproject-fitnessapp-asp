@@ -4,54 +4,53 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp.Data;
-using System;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FoodItemsController : ControllerBase
+    public class FoodTypesController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public FoodItemsController(ApplicationContext context)
+        public FoodTypesController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/FoodItems
+        // GET: api/FoodTypes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodSet()
+        public async Task<ActionResult<IEnumerable<FoodType>>> GetFoodType()
         {
-            return await _context.food.ToListAsync();
+            return await _context.foodtypes.ToListAsync();
         }
 
-        // GET: api/FoodItems/5
+        // GET: api/FoodTypes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FoodItem>> GetFoodItem(int id)
+        public async Task<ActionResult<FoodType>> GetFoodType(int id)
         {
-            var foodItem = await _context.food.FindAsync(id);
+            var foodType = await _context.foodtypes.FindAsync(id);
 
-            if (foodItem == null)
+            if (foodType == null)
             {
                 return NotFound();
             }
 
-            return foodItem;
+            return foodType;
         }
 
-        // PUT: api/FoodItems/5
+        // PUT: api/FoodTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFoodItem(int id, FoodItem foodItem)
+        public async Task<IActionResult> PutFoodType(int id, FoodType foodType)
         {
-            if (id != foodItem.id)
+            if (id != foodType.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(foodItem).State = EntityState.Modified;
+            _context.Entry(foodType).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +58,7 @@ namespace courseproject_fitnessapp_asp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FoodItemExists(id))
+                if (!FoodTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -72,37 +71,37 @@ namespace courseproject_fitnessapp_asp.Controllers
             return NoContent();
         }
 
-        // POST: api/FoodItems
+        // POST: api/FoodTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<FoodItem>> AddFoodItem([FromBody]FoodItem foodItem)
+        public async Task<ActionResult<FoodType>> PostFoodType(FoodType foodType)
         {
-            _context.food.Add(foodItem);
+            _context.foodtypes.Add(foodType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFoodItem", new { id = foodItem.id }, foodItem);
+            return CreatedAtAction("GetFoodType", new { id = foodType.id }, foodType);
         }
 
-        // DELETE: api/FoodItems/5
+        // DELETE: api/FoodTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<FoodItem>> DeleteFoodItem(int id)
+        public async Task<ActionResult<FoodType>> DeleteFoodType(int id)
         {
-            var foodItem = await _context.food.FindAsync(id);
-            if (foodItem == null)
+            var foodType = await _context.foodtypes.FindAsync(id);
+            if (foodType == null)
             {
                 return NotFound();
             }
 
-            _context.food.Remove(foodItem);
+            _context.foodtypes.Remove(foodType);
             await _context.SaveChangesAsync();
 
-            return foodItem;
+            return foodType;
         }
 
-        private bool FoodItemExists(int id)
+        private bool FoodTypeExists(int id)
         {
-            return _context.food.Any(e => e.id == id);
+            return _context.foodtypes.Any(e => e.id == id);
         }
     }
 }

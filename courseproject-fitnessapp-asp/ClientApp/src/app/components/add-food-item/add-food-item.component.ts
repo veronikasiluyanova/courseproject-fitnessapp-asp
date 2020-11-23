@@ -1,8 +1,9 @@
 import {Component, OnInit, Input, Inject} from '@angular/core'
 import { FoodService } from '../../services/food.service'
-import { FormGroup, FormBuilder } from '@angular/forms'
-import { FoodItem } from '../../fooditem'
 import { Router } from '@angular/router'
+import { FoodItem } from '../../models/fooditem'
+import { FoodTypeService } from '../../services/foodtype.service'
+import { FoodType } from '../../models/foodtype'
 
 @Component({
   selector: 'app-components-add-food-item',
@@ -11,13 +12,17 @@ import { Router } from '@angular/router'
 })
 export class AddFoodItemComponent implements OnInit {
   @Input() newfooditem = new FoodItem()
+  public foodTypes: FoodType[]
 
   constructor(private foodService: FoodService,
-    private fb: FormBuilder,
     private router: Router,
-    @Inject('BASE_URL') private baseUrl: string) { }
+    private foodtypeService: FoodTypeService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void{
+    this.foodtypeService.getFoodTypes().subscribe(data => {
+      this.foodTypes = data
+    })
+  }
 
   addFoodItemClick() {
     this.newfooditem.food_type_id = parseInt(this.newfooditem.food_type_id.toString())
@@ -31,5 +36,8 @@ export class AddFoodItemComponent implements OnInit {
     console.log("Add.  " + this.newfooditem)
   }
 
+  changeClient(event) {
+    console.log(event);
+  }
   
 }

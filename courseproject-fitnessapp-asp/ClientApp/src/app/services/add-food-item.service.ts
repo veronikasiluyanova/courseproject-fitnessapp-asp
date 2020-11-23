@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FoodItem } from '../fooditem';
+import { FoodItem } from '../models/fooditem';
 
 @Injectable()
 export class AddFoodItemService {

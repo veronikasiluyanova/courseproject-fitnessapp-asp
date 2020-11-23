@@ -51,20 +51,22 @@
     <None Remove="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <None Remove="ClientApp\src\app\components\mypage\mypage.component.ts" />
     <None Remove="ClientApp\src\app\fooditem.ts" />
+    <None Remove="ClientApp\src\app\models\foodtype.ts" />
     <None Remove="ClientApp\src\app\services\food.service.ts" />
+    <None Remove="ClientApp\src\app\services\foodtype.service.ts" />
     <None Remove="ClientApp\src\app\user.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\mypage\mypage.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\fooditem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\fooditem.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\foodtype.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\foodtype.service.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\services\food.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\user.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\interfaces\" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
