@@ -1,10 +1,14 @@
+<h2>
+  Энергетическая ценность продуктов
+</h2>
+
 <div>
   <button mat-raised-button color="primary" [routerLink]="['/add-food-item']">Добавить продукт</button>
 </div>
 
 <div>
   <p *ngIf="!allFood">
-    <b>Список пуст</b>
+    <b>Загрузка...</b>
   </p>
 </div>
 
@@ -12,7 +16,7 @@
   <table mat-table *ngIf="allFood" [dataSource]="allFood" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Продукт </th>
+      <th mat-header-cell *matHeaderCellDef> Продукт (100г) </th>
       <td mat-cell *matCellDef="let f"> {{f.name}} </td>
     </ng-container>
 
@@ -22,17 +26,17 @@
     </ng-container>
 
     <ng-container matColumnDef="protein">
-      <th mat-header-cell *matHeaderCellDef> Белки </th>
+      <th mat-header-cell *matHeaderCellDef> Белки (г) </th>
       <td mat-cell *matCellDef="let f"> {{f.protein}} </td>
     </ng-container>
 
     <ng-container matColumnDef="fats">
-      <th mat-header-cell *matHeaderCellDef> Жиры </th>
+      <th mat-header-cell *matHeaderCellDef> Жиры (г) </th>
       <td mat-cell *matCellDef="let f"> {{f.fats}} </td>
     </ng-container>
 
     <ng-container matColumnDef="carbs">
-      <th mat-header-cell *matHeaderCellDef> Углеводы </th>
+      <th mat-header-cell *matHeaderCellDef> Углеводы (г) </th>
       <td mat-cell *matCellDef="let f"> {{f.carbs}} </td>
     </ng-container>
 

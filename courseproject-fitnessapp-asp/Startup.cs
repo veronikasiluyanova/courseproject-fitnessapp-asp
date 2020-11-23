@@ -1,20 +1,25 @@
 using courseproject_fitnessapp_asp.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 
 namespace courseproject_fitnessapp_asp
 {
     public class Startup
     {
         private string _connectionString = null;
+        private string _connectionStringUsers = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,19 +31,44 @@ namespace courseproject_fitnessapp_asp
         public void ConfigureServices(IServiceCollection services)
         {
             _connectionString = "Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;"; //Configuration["DefaultConnection"];
+            _connectionStringUsers = "Host=127.0.0.1;Port=5432;Database=FitnessApp_Users;User ID=vs;Password=password;";
+
+            //services.AddAuthentication(opt =>
+            //{
+            //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(options =>
+            //   {
+            //       options.TokenValidationParameters = new TokenValidationParameters
+            //       {
+            //           ValidateIssuer = true,
+            //           ValidateAudience = true,
+            //           ValidateLifetime = true,
+            //           ValidateIssuerSigningKey = true,
+
+            //           ValidIssuer = "https://localhost:5001",
+            //           ValidAudience = "https://localhost:5001",
+            //           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+            //       };
+            //    });
 
             services.AddCors(options => options.AddPolicy("Cors", builder => {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+
+            services.AddControllers();
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
 
             services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(_connectionString));
-            
+            services.AddDbContext<UserDbContext>(options => options.UseNpgsql(_connectionStringUsers));
+
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationContext>()
+            //    .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +95,9 @@ namespace courseproject_fitnessapp_asp
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp.Data;
+using System;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
@@ -77,6 +78,7 @@ namespace courseproject_fitnessapp_asp.Controllers
         [HttpPost]
         public async Task<ActionResult<FoodItem>> AddFoodItem([FromBody]FoodItem foodItem)
         {
+            //foodItem.food_type_id = Convert.ToInt32(foodItem.food_type_id);
             _context.food.Add(foodItem);
             await _context.SaveChangesAsync();
 
