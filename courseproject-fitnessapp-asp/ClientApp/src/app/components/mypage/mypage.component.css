@@ -1,15 +1,53 @@
 body {
 }
 
-.mainInfo {
+.pagecontainer {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 90vh;
+}
+
+.infocontainer {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .infoCard {
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 40%;
-  margin: auto;
+  width: 70vh;
+  height: 78%;
 }
+
+.mainInfo {
+  display: flex;
+  align-items: center;
+}
+
+.testCard {
+  width: 70vh;
+  height: 20%;
+}
+
+.diarywatercontainer {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.diaryCard {
+  width: 70vh;
+  height: 58%;
+}
+
+.waterCard {
+  width: 70vh;
+  height: 40%;
+}
+
+

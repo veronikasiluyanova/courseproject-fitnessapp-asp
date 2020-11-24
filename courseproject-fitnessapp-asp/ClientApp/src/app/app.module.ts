@@ -9,8 +9,10 @@ import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FoodComponent } from './components/food/food.component';
 import { AddFoodItemComponent } from './components/add-food-item/add-food-item.component';
+import { MyPageComponent } from './components/mypage/mypage.component';
 
 import { FoodService } from './services/food.service';
+import { FoodTypeService } from './services/foodtype.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
@@ -20,8 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MyPageComponent } from './components/mypage/mypage.component';
-import { FoodTypeService } from './services/foodtype.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FoodTypeService } from './services/foodtype.service';
       { path: 'add-food-item', component: AddFoodItemComponent },
       { path: 'mypage', component: MyPageComponent }
     ]),
-    MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule
+    MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
+    MatIconModule
   ],
   providers: [
     FoodService,

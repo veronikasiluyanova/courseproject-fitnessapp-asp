@@ -10,6 +10,7 @@ import { FoodType } from '../../models/foodtype'
   templateUrl: './add-food-item.component.html',
   styleUrls: ['./add-food-item.component.css']
 })
+
 export class AddFoodItemComponent implements OnInit {
   @Input() newfooditem = new FoodItem()
   public foodTypes: FoodType[]
@@ -32,12 +33,7 @@ export class AddFoodItemComponent implements OnInit {
     this.newfooditem.kcal = parseFloat(this.newfooditem.kcal.toString())
     this.foodService.createFoodItem(this.newfooditem).subscribe(data => {
       this.router.navigate(["/food-info"])
-    });
-    console.log("Add.  " + this.newfooditem)
-  }
-
-  changeClient(event) {
-    console.log(event);
+    })
   }
   
 }

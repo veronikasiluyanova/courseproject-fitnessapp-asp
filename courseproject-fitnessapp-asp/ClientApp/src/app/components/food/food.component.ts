@@ -12,7 +12,6 @@ import { FoodTypeService } from '../../services/foodtype.service'
 export class FoodComponent implements OnInit {
   public allFood: FoodItem[]
   public foodTypes: FoodType[]
-  public typeNames: string[]
 
   displayedColumns: string[] = ['name', 'food_type_id', 'protein', 'fats', 'carbs', 'kcal']
 
@@ -24,11 +23,8 @@ export class FoodComponent implements OnInit {
       this.allFood = data
     })
     this.foodtypeService.getFoodTypes().subscribe(data => {
-      this.foodTypes = data
+      this.foodTypes = data;
     })
-    for (let t of Object.keys(this.foodTypes)) {
-      this.typeNames.push(this.foodTypes[t].food_type)
-    }
   }
 
 }

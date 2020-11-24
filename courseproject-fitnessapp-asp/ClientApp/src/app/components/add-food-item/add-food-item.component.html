@@ -2,7 +2,6 @@
   <mat-card>
     <mat-card-content>
       <form>
-        <!--[formGroup]="addFoodItemForm" (ngSubmit)="onSubmit()" formControlName="name"-->
         <div>
           <mat-form-field class="example-full-width form-group">
             <mat-label class="required">Продукт</mat-label>
@@ -11,7 +10,7 @@
 
           <mat-form-field class=" form-group">
             <mat-label class="required">Тип</mat-label>
-            <mat-select id="food_type_id" placeholder="Тип" [(ngModel)]="newfooditem.food_type_id" name="food_type_id" (change)="changeType($event.value)">
+            <mat-select id="food_type_id" placeholder="Тип" [(ngModel)]="newfooditem.food_type_id" name="food_type_id" >
               <mat-option *ngFor="let t of foodTypes" [value]="t.id">{{t.food_type}}</mat-option>
             </mat-select>
           </mat-form-field>

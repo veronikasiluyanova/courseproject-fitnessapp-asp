@@ -1,21 +1,51 @@
-<mat-card class="infoCard">
-  <div class="mainInfo">
-    <mat-label>
-      Username
-    </mat-label>
-    <div>
-      <p>
-        <mat-label>Start weight</mat-label> <br />
-        ..kg
-      </p>
-      <p>
-        <mat-label>Lost weight</mat-label> <br />
-        ..kg
-      </p>
-      <p>
-        <mat-label>Goal weight</mat-label> <br />
-        ..kg
-      </p>
-    </div>
+<div class="pagecontainer">
+  <div class="infocontainer">
+    <mat-card class="infoCard">
+      <div class="mainInfo">
+        <mat-label>
+          Username
+        </mat-label>
+        <div>
+          <p>
+            <mat-label>Начальный вес</mat-label> <br />
+            ..kg
+          </p>
+          <p>
+            <mat-label>Текущий вес</mat-label> <br />
+            ..kg
+          </p>
+          <p>
+            <mat-label>Желанный вес</mat-label> <br />
+            ..kg
+          </p>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="testCard">
+
+    </mat-card>
   </div>
-</mat-card>
+
+  <div class="diarywatercontainer">
+    <mat-card class="diaryCard">
+      <mat-label>Дневник питания</mat-label>
+      <div class="diaryData">
+
+      </div>
+    </mat-card>
+
+    <mat-card class="waterCard">
+      <mat-label>Вода</mat-label>
+      <div class="incdecBtns">
+        <button mat-icon-button class="incrBtn">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+        <button mat-icon-button class="decrBtn">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </div>
+      <mat-label>Изменить норму</mat-label>
+    </mat-card>
+  </div>
+
+</div>
