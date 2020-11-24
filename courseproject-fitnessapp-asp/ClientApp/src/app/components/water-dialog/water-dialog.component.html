@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <p>Установите количество воды, которое Вы хотите потреблять ежедневно.</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="water">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="water" cdkFocusInitial>Установить</button>
+  <button mat-button mat-dialog-close>Отмена</button>
+</div>

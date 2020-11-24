@@ -1,6 +1,14 @@
 body {
 }
 
+h4 {
+  width: 100%;
+  text-align: center;
+}
+.username{
+  width: auto;
+}
+
 .pagecontainer {
   display: flex;
   flex-direction: row;
@@ -19,17 +27,18 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 70vh;
+  width: 35vw;
   height: 78%;
 }
 
 .mainInfo {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-around; 
 }
 
 .testCard {
-  width: 70vh;
+  width: 35vw;
   height: 20%;
 }
 
@@ -41,12 +50,12 @@ body {
 }
 
 .diaryCard {
-  width: 70vh;
+  width: 35vw;
   height: 58%;
 }
 
 .waterCard {
-  width: 70vh;
+  width: 35vw;
   height: 40%;
 }
 

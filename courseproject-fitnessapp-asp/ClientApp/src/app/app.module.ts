@@ -23,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { WaterDialogComponent } from './components/water-dialog/water-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +33,8 @@ import { MatIconModule } from '@angular/material/icon';
     HomeComponent,
     FoodComponent,
     AddFoodItemComponent,
-    MyPageComponent
-
+    MyPageComponent,
+    WaterDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
@@ -45,13 +47,15 @@ import { MatIconModule } from '@angular/material/icon';
       { path: 'mypage', component: MyPageComponent }
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
-    MatIconModule
+    MatIconModule, MatDialogModule
   ],
   providers: [
     FoodService,
     FoodTypeService,
-    CdkColumnDef
+    CdkColumnDef,
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [WaterDialogComponent]
 })
 export class AppModule { }

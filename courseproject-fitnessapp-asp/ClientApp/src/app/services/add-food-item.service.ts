@@ -8,7 +8,7 @@ export class AddFoodItemService {
     constructor(private http: HttpClient) {
     }
 
-    createFoodItem(newitem: FoodItem) {
+  createFoodItem(newitem: FoodItem) {
         return this.http.post(this.url, newitem);
       }
 }

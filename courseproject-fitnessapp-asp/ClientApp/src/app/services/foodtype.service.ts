@@ -1,6 +1,6 @@
-import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FoodType } from '../models/foodtype';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FoodTypeService {

@@ -2,10 +2,14 @@
   <div class="infocontainer">
     <mat-card class="infoCard">
       <div class="mainInfo">
-        <mat-label>
+        <h3 class="username">
           Username
-        </mat-label>
-        <div>
+        </h3>
+        <div class="weightInfo">
+          <p>
+            <mat-label>Цель</mat-label> <br />
+            ...
+          </p>
           <p>
             <mat-label>Начальный вес</mat-label> <br />
             ..kg
@@ -15,7 +19,7 @@
             ..kg
           </p>
           <p>
-            <mat-label>Желанный вес</mat-label> <br />
+            <mat-label>Целевой вес?</mat-label> <br />
             ..kg
           </p>
         </div>
@@ -28,14 +32,15 @@
 
   <div class="diarywatercontainer">
     <mat-card class="diaryCard">
-      <mat-label>Дневник питания</mat-label>
+      <h4>Дневник питания</h4>
       <div class="diaryData">
 
       </div>
     </mat-card>
 
     <mat-card class="waterCard">
-      <mat-label>Вода</mat-label>
+      <h4>Вода</h4>
+
       <div class="incdecBtns">
         <button mat-icon-button class="incrBtn">
           <mat-icon>add_circle</mat-icon>
@@ -44,7 +49,9 @@
           <mat-icon>remove_circle</mat-icon>
         </button>
       </div>
-      <mat-label>Изменить норму</mat-label>
+
+      <button mat-button (click)="openDialog()">Установить норму</button>
+      <mat-label *ngIf="water">{{water}}</mat-label>
     </mat-card>
   </div>
 
