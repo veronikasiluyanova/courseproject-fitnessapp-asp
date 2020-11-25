@@ -30,6 +30,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +57,10 @@
     <None Remove="ClientApp\src\app\services\food.service.ts" />
     <None Remove="ClientApp\src\app\services\foodtype.service.ts" />
     <None Remove="ClientApp\src\app\user.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\courseproject-fitnessapp-asp-common\courseproject-fitnessapp-asp-common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

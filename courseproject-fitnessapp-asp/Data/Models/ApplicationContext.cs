@@ -8,6 +8,7 @@ namespace courseproject_fitnessapp_asp
         public DbSet<User> UsersSet { get; set; }
         public DbSet<FoodItem> food { get; set; }
         public DbSet<FoodType> foodtypes { get; set; }
+        public DbSet<Account> accounts { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
              : base(options) { }

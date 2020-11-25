@@ -1,4 +1,5 @@
 using courseproject_fitnessapp_asp.Data;
+using courseproject_fitnessapp_asp_common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,42 +20,20 @@ namespace courseproject_fitnessapp_asp
     public class Startup
     {
         private string _connectionString = null;
-        private string _connectionStringUsers = null;
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             _connectionString = "Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;"; //Configuration["DefaultConnection"];
-            _connectionStringUsers = "Host=127.0.0.1;Port=5432;Database=FitnessApp_Users;User ID=vs;Password=password;";
 
-            //services.AddAuthentication(opt =>
-            //{
-            //    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(options =>
-            //   {
-            //       options.TokenValidationParameters = new TokenValidationParameters
-            //       {
-            //           ValidateIssuer = true,
-            //           ValidateAudience = true,
-            //           ValidateLifetime = true,
-            //           ValidateIssuerSigningKey = true,
 
-            //           ValidIssuer = "https://localhost:5001",
-            //           ValidAudience = "https://localhost:5001",
-            //           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-            //       };
-            //    });
-
-            services.AddCors(options => options.AddPolicy("Cors", builder => {
-                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-            }));
+            services.AddRouting();
 
             services.AddControllers();
 
@@ -64,26 +43,29 @@ namespace courseproject_fitnessapp_asp
             });
 
             services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(_connectionString));
-            services.AddDbContext<UserDbContext>(options => options.UseNpgsql(_connectionStringUsers));
 
-            //services.AddIdentity<User, IdentityRole>()
-            //    .AddEntityFrameworkStores<ApplicationContext>()
-            //    .AddDefaultTokenProviders();
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
+            services.Configure<AuthOptions>(authOptionsConfiguration);
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("Cors");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
 
             app.UseHttpsRedirection();            
@@ -96,14 +78,17 @@ namespace courseproject_fitnessapp_asp
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseCors();
+
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>

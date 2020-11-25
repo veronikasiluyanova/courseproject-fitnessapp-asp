@@ -1,7 +1,7 @@
 <div mat-dialog-content>
   <p>Установите количество воды, которое Вы хотите потреблять ежедневно.</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="water">
+    <input matInput type="number" min="250" max="2500" step="250" [(ngModel)]="water">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
