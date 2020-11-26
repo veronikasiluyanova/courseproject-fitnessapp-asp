@@ -1,0 +1,33 @@
+body {
+  /*background-image: url('D:\University\CourseProject_ASP\courseproject-fitnessapp-asp\courseproject-fitnessapp-asp\ClientApp\src\assets\images\3.jpg');*/
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+}
+
+#title {
+  width: 100%;
+  text-align: center;
+}
+
+#regLink {
+  display: flex;
+  justify-content: center;
+}
+
+#loginBtn {
+  display: flex;
+  justify-content: center;
+
+}

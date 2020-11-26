@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using courseproject_fitnessapp_asp_auth.Models;
+using courseproject_fitnessapp_asp;
+using courseproject_fitnessapp_asp.Data;
 using courseproject_fitnessapp_asp_common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Npgsql;
 
 namespace courseproject_fitnessapp_asp_auth.Controllers
 {
@@ -18,15 +17,17 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IOptions<AuthOptions> authOptions;
-        private List<Account> accounts = new List<Account>();
-        private NpgsqlConnection conn;
-        public AuthController(IOptions<AuthOptions> authOptions)
+        private readonly ApplicationContext _context;
+        //private List<Account> accounts = new List<Account>();
+        //private NpgsqlConnection conn;
+        public AuthController(IOptions<AuthOptions> authOptions, ApplicationContext context)
         {
             this.authOptions = authOptions;
-            conn = new NpgsqlConnection("Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;");
-            conn.Open();
-            QueryUsers(conn);
-            conn.Close();
+            this._context = context;
+            //conn = new NpgsqlConnection("Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;");
+            //conn.Open();
+            //QueryUsers(conn);
+            //conn.Close();
         }
 
         [HttpPost, Route("Login")]
@@ -48,7 +49,7 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
 
         private Account AuthenticateUser(string username, string password)
         {
-            return accounts.SingleOrDefault(u => u.username == username && u.password == password);
+            return _context.accounts.SingleOrDefault(u => u.username == username && u.password == password);
         }
 
         private string GenerateJWT(Account user)
@@ -78,37 +79,37 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private void QueryUsers(NpgsqlConnection conn)
-        {
-            string sql = "select id, username, password, role from accounts";
+        //private void QueryUsers(NpgsqlConnection conn)
+        //{
+        //    string sql = "select id, username, password, role from accounts";
 
-            NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
+        //    NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
 
-            using (NpgsqlDataReader reader = cmd.ExecuteReader())
-            {
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        Role r = Role.User;
-                        //Role[] r = new Role[] { Role.User };
+        //    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+        //    {
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                Role r = Role.User;
+        //                //Role[] r = new Role[] { Role.User };
 
-                        if (reader.GetInt32("role") == 1)
-                            r = Role.Admin;
-                        //r = new Role[] { Role.Admin };
+        //                if (reader.GetInt32("role") == 1)
+        //                    r = Role.Admin;
+        //                //r = new Role[] { Role.Admin };
 
-                        accounts.Add(
-                        new Account
-                        {
-                            id = reader.GetGuid("id"),//= Guid.Parse("e2371dc9-a849-4f3c-9004-df8fc921c13a"),
-                            username = reader.GetString("username"),//"user@email.com",
-                            password = reader.GetString("password"),
-                            role = r
-                        });
+        //                _context.accounts.Add(
+        //                new Account
+        //                {
+        //                    id = reader.GetGuid("id"),//= Guid.Parse("e2371dc9-a849-4f3c-9004-df8fc921c13a"),
+        //                    username = reader.GetString("username"),//"user@email.com",
+        //                    password = reader.GetString("password"),
+        //                    role = r
+        //                });
 
-                    }
-                }
-            }
-        }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

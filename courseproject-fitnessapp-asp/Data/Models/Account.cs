@@ -10,7 +10,7 @@ namespace courseproject_fitnessapp_asp.Data
         public Guid id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public Role[] role { get; set; }
+        public Role role { get; set; }
     }
 
     public enum Role

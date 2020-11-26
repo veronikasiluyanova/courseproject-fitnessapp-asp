@@ -4,11 +4,10 @@ import { FoodItem } from '../models/fooditem';
 
 @Injectable()
 export class AddFoodItemService {
-    private url = "";
-    constructor(private http: HttpClient) {
-    }
+  private url = "api/FoodItems";
+    constructor(private http: HttpClient) { }
 
   createFoodItem(newitem: FoodItem) {
         return this.http.post(this.url, newitem);
-      }
+   }
 }

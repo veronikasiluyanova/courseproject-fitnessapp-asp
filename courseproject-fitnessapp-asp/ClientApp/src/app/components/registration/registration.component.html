@@ -1,25 +1,38 @@
-<mat-card *ngIf="!isLoggedIn">
-  <mat-card-title>Вход</mat-card-title>
+<mat-card>
+  <mat-card-title>Регистрация</mat-card-title>
   <mat-card-content>
-    <form >
+    <form>
       <div>
         <mat-form-field>
-          <input matInput type="text" placeholder="Имя пользователя" [(ngModel)]="newuser.username" name="username" #username />
+          <input matInput type="text" placeholder="Имя пользователя" [(ngModel)]="newaccount.username" name="username" #username />
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field>
-          <input matInput type="password" placeholder="Пароль" [(ngModel)]="newuser.password" name="password" #password />
+          <input matInput type="email" placeholder="Email" [(ngModel)]="newuser.email" name="email" #email />
         </mat-form-field>
       </div>
 
-      <p *ngIf="error" class="error">
-        {{ error }}
+      <div>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Пароль" [(ngModel)]="newaccount.password" name="password" #password />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <input matInput type="password" placeholder="Повторить пароль" name="repeatpassword" #repeatpassword />
+        </mat-form-field>
+      </div>
+
+      <p *ngIf="password.value != repeatpassword.value" class="error">
+        Пароли не совпадают
       </p>
 
       <div class="button">
-        <button type="submit" mat-raised-button color="primary" (click)="login(username.value, password.value)">Войти</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="password.value != repeatpassword.value"
+                (click)="registrate(username.value, email.value, password.value)">Зарегистрироваться</button>
       </div>
 
     </form>

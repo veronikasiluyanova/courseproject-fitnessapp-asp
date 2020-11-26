@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { User } from '../../models/user';
+import { Account } from '../../models/account';
 import { AuthService } from '../../services/auth.service';
-import { error } from 'protractor';
 
 @Component({
   selector: 'app-components-login',
@@ -9,16 +8,21 @@ import { error } from 'protractor';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  @Input() newuser = new User()
+  @Input() currentaccount = new Account()
   error: string
 
   constructor(private authService: AuthService) { }
+
+  public get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated()
+  }
 
   login(username: string, password: string) {
     this.authService.login(username, password)
       .subscribe(res => {
 
       }, error => {
+        console.log(error)
         this.error = 'Неправильный логин или пароль.'
       })
   }

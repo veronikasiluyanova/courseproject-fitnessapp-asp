@@ -6,19 +6,19 @@ namespace courseproject_fitnessapp_asp.Data
     public class User
     {
         [Key]
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Surname { get; set; }
-        public string Firstname { get; set; }
-        public string Gender { get; set; }
+        public int id { get; set; }
+        public Guid account_id { get; set; }
+        public string email { get; set; }
+        public string username { get; set; }
+        public string gender { get; set; }
         public DateTime birthday { get; set; }
-        public int Goal_id { get; set; }
-        public double? Goal_weight { get; set; }
-        public double Protein_norm { get; set; }
-        public double Fats_norm { get; set; }
-        public double Carbs_norm { get; set; }
-        public double Kcal_norm { get; set; }
-        public string Additional_info { get; set; }
+        public int goal_id { get; set; }
+        public double? goal_weight { get; set; }
+        public double protein_norm { get; set; }
+        public double fats_norm { get; set; }
+        public double carbs_norm { get; set; }
+        public double kcal_norm { get; set; }
+        public string? additional_info { get; set; }
         // Photo { get; set; }
     }
 }

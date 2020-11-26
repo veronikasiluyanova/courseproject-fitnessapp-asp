@@ -17,6 +17,7 @@
     <PackageReference Include="IdentityServer4" Version="4.1.1" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.1" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.1" />
+    <PackageReference Include="MailKit" Version="2.10.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
@@ -49,7 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\app-injection-tokens.ts" />
     <None Remove="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <None Remove="ClientApp\src\app\components\mypage\mypage.component.ts" />
     <None Remove="ClientApp\src\app\components\water-dialog\water-dialog.component.ts" />
@@ -57,9 +57,11 @@
     <None Remove="ClientApp\src\app\guards\auth.guard.ts" />
     <None Remove="ClientApp\src\app\models\foodtype.ts" />
     <None Remove="ClientApp\src\app\models\token.ts" />
+    <None Remove="ClientApp\src\app\models\user.ts" />
     <None Remove="ClientApp\src\app\services\auth.service.ts" />
     <None Remove="ClientApp\src\app\services\food.service.ts" />
     <None Remove="ClientApp\src\app\services\foodtype.service.ts" />
+    <None Remove="ClientApp\src\app\services\registration.service.ts" />
     <None Remove="ClientApp\src\app\user.ts" />
   </ItemGroup>
 
@@ -68,7 +70,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\app-injection-tokens.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\mypage\mypage.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\water-dialog\water-dialog.component.ts" />
@@ -76,12 +77,14 @@
     <TypeScriptCompile Include="ClientApp\src\app\models\fooditem.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\foodtype.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\token.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\foodtype.service.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\services\food.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\account.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\registration.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

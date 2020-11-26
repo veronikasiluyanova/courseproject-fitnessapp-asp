@@ -1,30 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { User } from '../../models/user';
+import { Account, Role } from '../../models/account';
+import { RegistrationService } from '../../services/registration.service';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { error } from 'protractor';
 
 @Component({
-  selector: 'app-components-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-components-registration',
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.css']
 })
-export class LoginComponent {
+export class RegistrationComponent {
+  @Input() newaccount = new Account()
   @Input() newuser = new User()
-  error: string
 
-  constructor(private authService: AuthService) { }
+  constructor(private regService: RegistrationService,
+    private authService: AuthService,
+    private router: Router) { }
 
-  login(username: string, password: string) {
-    this.authService.login(username, password)
-      .subscribe(res => {
-
-      }, error => {
-        this.error = 'Неправильный логин или пароль.'
+  registrate() {
+    this.newaccount.role = Role.User;
+    this.regService.registrateAccount(this.newaccount)
+      .subscribe(data => {
+        this.authService.login(this.newaccount.username, this.newaccount.password);
+        this.router.navigate(["/mypage"])
       })
   }
-
-  logout() {
-    this.authService.logout()
-  }
-  
 }

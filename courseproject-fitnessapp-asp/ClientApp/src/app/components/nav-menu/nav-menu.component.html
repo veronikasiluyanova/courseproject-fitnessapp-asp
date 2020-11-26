@@ -20,18 +20,21 @@
         [ngClass]="{ show: isExpanded }"
       >
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item"
+          <!--<li class="nav-item"
               [routerLinkActive]="['link-active']"
               [routerLinkActiveOptions]="{ exact: true }">
             <a class="nav-link text-dark" [routerLink]="['/']">Главная</a>
-          </li>
+          </li>-->
           <li class="nav-item"
               [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/mypage']" *ngIf="isLoggedIn">Моя страница</a>
           </li>
           <li class="nav-item"
               [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/food-info']">Продукты</a>
+            <a class="nav-link text-dark" [routerLink]="['/food-info']" *ngIf="isLoggedIn">Продукты</a>
+          </li>
+          <li class="nav-item">
+            <button mat-raised-button *ngIf="isLoggedIn" (click)="logout()">Выйти</button>
           </li>
         </ul>
       </div>
