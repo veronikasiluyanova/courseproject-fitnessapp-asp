@@ -1,6 +1,7 @@
 ﻿using courseproject_fitnessapp_asp.Data;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace courseproject_fitnessapp_asp
 {
     public class ApplicationContext : DbContext 

@@ -25,6 +25,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { WaterDialogComponent } from './components/water-dialog/water-dialog.component';
+import { LoginComponent } from './components/login/login.component';
+
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from '../environments/environment';
+import { ACCESS_TOKEN_KEY } from './services/auth.service';
+import { AUTH_API_URL, STORE_API_URL } from './app-injection-tokens';
+
+export function tokenGetter() {
+  return localStorage.getItem(ACCESS_TOKEN_KEY)
+}
 
 @NgModule({
   declarations: [
@@ -34,26 +44,40 @@ import { WaterDialogComponent } from './components/water-dialog/water-dialog.com
     FoodComponent,
     AddFoodItemComponent,
     MyPageComponent,
-    WaterDialogComponent
+    WaterDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'food-info', component: FoodComponent },
       { path: 'add-food-item', component: AddFoodItemComponent },
       { path: 'mypage', component: MyPageComponent }
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
-    MatIconModule, MatDialogModule
+    MatIconModule, MatDialogModule,
+
+    //JwtHelperService,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: environment.tokenWhiteListedDomains
+      }
+    })
   ],
   providers: [
     FoodService,
     FoodTypeService,
     CdkColumnDef,
-    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
+
+    { provide: AUTH_API_URL, useValue: environment.authApi },
+
+    { provide: STORE_API_URL, useValue: environment.storeApi }
   ],
   bootstrap: [AppComponent],
   entryComponents: [WaterDialogComponent]

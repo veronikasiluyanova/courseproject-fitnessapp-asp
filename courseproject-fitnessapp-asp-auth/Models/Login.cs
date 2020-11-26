@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace courseproject_fitnessapp_asp.Data
+namespace courseproject_fitnessapp_asp_auth.Models
 {
     public class Login
     {
