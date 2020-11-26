@@ -31,6 +31,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { AUTH_API_URL, STORE_API_URL } from './app-injection-tokens';
+import { AuthGuard } from './guards/auth.guard';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -56,12 +57,11 @@ export function tokenGetter() {
       { path: 'home', component: HomeComponent },
       { path: 'food-info', component: FoodComponent },
       { path: 'add-food-item', component: AddFoodItemComponent },
-      { path: 'mypage', component: MyPageComponent }
+      { path: 'mypage', component: MyPageComponent, canActivate: [AuthGuard] }
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
     MatIconModule, MatDialogModule,
 
-    //JwtHelperService,
     JwtModule.forRoot({
       config: {
         tokenGetter,
