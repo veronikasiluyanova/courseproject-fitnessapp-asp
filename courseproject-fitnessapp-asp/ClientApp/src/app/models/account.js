@@ -1,7 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Account = /** @class */ (function () {
-    function Account(username, password, role) {
+    function Account(
+    // public id?: Guid,
+    id, username, password, role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;

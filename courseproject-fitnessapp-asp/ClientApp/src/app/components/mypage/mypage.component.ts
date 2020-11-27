@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { WaterDialogComponent } from '../water-dialog/water-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-components-mypage',
@@ -8,12 +9,14 @@ import { WaterDialogComponent } from '../water-dialog/water-dialog.component';
   styleUrls: ['./mypage.component.css']
 })
 export class MyPageComponent implements OnInit {
-  water: string;
+  water: string
+  username: string
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-        
+    this.username = this.route.snapshot.params['username']
   }
 
   openDialog() {

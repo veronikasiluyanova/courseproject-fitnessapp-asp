@@ -1,11 +1,15 @@
 body {
-  /*background-image: url('D:\University\CourseProject_ASP\courseproject-fitnessapp-asp\courseproject-fitnessapp-asp\ClientApp\src\assets\images\3.jpg');*/
+  /*background-image: url("~/assets/images/2.jpg");
+  background-size: cover;*/
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
 }
 
-#main {
+/*#main {
   display: flex;
   justify-content: center;
-}
+}*/
 
 #container {
   display: flex;

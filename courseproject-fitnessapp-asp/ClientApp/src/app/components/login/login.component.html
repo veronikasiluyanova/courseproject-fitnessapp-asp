@@ -1,32 +1,32 @@
-<div id="main">
-  <mat-card id="container" *ngIf="!isLoggedIn">
-    <mat-card-title id="title">Вход</mat-card-title>
-    <mat-card-content>
-      <span id="regLink">
-        <a routerLink="/registration">Зарегистрироваться</a>
-      </span>
-      <form>
-        <div>
-          <mat-form-field>
-            <input matInput type="text" placeholder="Имя пользователя" [(ngModel)]="currentaccount.username" name="username" #username />
-          </mat-form-field>
-        </div>
+<body>
+    <mat-card id="container" *ngIf="!isLoggedIn">
+      <mat-card-title id="title">Вход</mat-card-title>
+      <mat-card-content>
+        <span id="regLink">
+          <a routerLink="/registration">Зарегистрироваться</a>
+        </span>
+        <form>
+          <div>
+            <mat-form-field>
+              <input matInput type="text" placeholder="Имя пользователя" [(ngModel)]="currentaccount.username" name="username" #username />
+            </mat-form-field>
+          </div>
 
-        <div>
-          <mat-form-field>
-            <input matInput type="password" placeholder="Пароль" [(ngModel)]="currentaccount.password" name="password" #password />
-          </mat-form-field>
-        </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="password" placeholder="Пароль" [(ngModel)]="currentaccount.password" name="password" #password />
+            </mat-form-field>
+          </div>
 
-        <p *ngIf="error" class="error">
-          {{ error }}
-        </p>
+          <p *ngIf="error" class="error">
+            {{ error }}
+          </p>
 
-        <div id="loginBtn">
-          <button type="submit" mat-raised-button color="primary" (click)="login(username.value, password.value)">Войти</button>
-        </div>
+          <div id="loginBtn">
+            <button type="submit" mat-raised-button color="primary" (click)="login(username.value, password.value)">Войти</button>
+          </div>
 
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+</body>

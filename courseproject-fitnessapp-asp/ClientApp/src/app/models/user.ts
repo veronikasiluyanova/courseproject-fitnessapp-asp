@@ -3,7 +3,8 @@ import { Guid } from "guid-typescript";
 export class User {
   constructor(
     public id?: number,
-    public account_id?: Guid,
+   // public account_id?: Guid,
+    public account_id?: string,
     public email?: string,
     public username?: string,
     public gender?: string,

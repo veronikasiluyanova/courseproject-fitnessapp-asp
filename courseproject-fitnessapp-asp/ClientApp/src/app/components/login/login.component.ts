@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Account } from '../../models/account';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-components-login',
@@ -11,7 +12,8 @@ export class LoginComponent {
   @Input() currentaccount = new Account()
   error: string
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   public get isLoggedIn(): boolean {
     return this.authService.isAuthenticated()
@@ -20,7 +22,7 @@ export class LoginComponent {
   login(username: string, password: string) {
     this.authService.login(username, password)
       .subscribe(res => {
-
+        this.router.navigate(["/mypage", this.currentaccount.username])
       }, error => {
         console.log(error)
         this.error = 'Неправильный логин или пароль.'

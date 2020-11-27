@@ -1,0 +1,31 @@
+body {
+  /*background-image: url("~/assets/images/2.jpg");
+  background-size: cover;*/
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+}
+
+#title {
+  width: 100%;
+  text-align: center;
+}
+
+#loginLink {
+  display: flex;
+  justify-content: center;
+}
+
+#regBtn {
+  display: flex;
+  justify-content: center;
+}

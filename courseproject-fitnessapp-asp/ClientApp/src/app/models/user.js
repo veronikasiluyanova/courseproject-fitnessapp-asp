@@ -1,7 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var User = /** @class */ (function () {
-    function User(id, account_id, email, username, gender, birthday, goal_id, goal_weight, protein_norm, fats_norm, carbs_norm, kcal_norm, additional_info) {
+    function User(id, 
+    // public account_id?: Guid,
+    account_id, email, username, gender, birthday, goal_id, goal_weight, protein_norm, fats_norm, carbs_norm, kcal_norm, additional_info) {
         this.id = id;
         this.account_id = account_id;
         this.email = email;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +27,7 @@ namespace courseproject_fitnessapp_asp.Controllers
 
         // GET: api/Accounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(Guid id)
+        public async Task<ActionResult<Account>> GetAccount(string id)
         {
             var account = await _context.accounts.FindAsync(id);
 
@@ -44,7 +43,7 @@ namespace courseproject_fitnessapp_asp.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(Guid id, Account account)
+        public async Task<IActionResult> PutAccount(string id, Account account)
         {
             if (id != account.id)
             {
@@ -79,14 +78,28 @@ namespace courseproject_fitnessapp_asp.Controllers
         public async Task<ActionResult<Account>> PostAccount(Account account)
         {
             _context.accounts.Add(account);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (AccountExists(account.id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtAction("GetAccount", new { id = account.id }, account);
         }
 
         // DELETE: api/Accounts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Account>> DeleteAccount(Guid id)
+        public async Task<ActionResult<Account>> DeleteAccount(string id)
         {
             var account = await _context.accounts.FindAsync(id);
             if (account == null)
@@ -100,7 +113,7 @@ namespace courseproject_fitnessapp_asp.Controllers
             return account;
         }
 
-        private bool AccountExists(Guid id)
+        private bool AccountExists(string id)
         {
             return _context.accounts.Any(e => e.id == id);
         }

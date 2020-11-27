@@ -13,6 +13,7 @@ import { MyPageComponent } from './components/mypage/mypage.component';
 import { WaterDialogComponent } from './components/water-dialog/water-dialog.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { NewUserInfoComponent } from './components/new-user-info/new-user-info.component';
 
 import { FoodService } from './services/food.service';
 import { FoodTypeService } from './services/foodtype.service';
@@ -29,6 +30,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
@@ -48,7 +52,8 @@ export function tokenGetter() {
     MyPageComponent,
     WaterDialogComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    NewUserInfoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
@@ -59,11 +64,12 @@ export function tokenGetter() {
       //{ path: 'home', component: HomeComponent },
       { path: 'food-info', component: FoodComponent, canActivate: [AuthGuard] },
       { path: 'add-food-item', component: AddFoodItemComponent, canActivate: [AuthGuard] },
-      { path: 'mypage', component: MyPageComponent, canActivate: [AuthGuard] },
-      { path: 'registration', component: RegistrationComponent }
+      { path: 'mypage/:username', component: MyPageComponent, canActivate: [AuthGuard] },
+      { path: 'registration', component: RegistrationComponent },
+      { path: 'user-start-info/:username/:email/:account_id', component: NewUserInfoComponent }
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
-    MatIconModule, MatDialogModule,
+    MatIconModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatStepperModule,
 
     JwtModule.forRoot({
       config: {

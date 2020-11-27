@@ -52,6 +52,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <None Remove="ClientApp\src\app\components\mypage\mypage.component.ts" />
+    <None Remove="ClientApp\src\app\components\new-user-info\new-user-info.component.ts" />
     <None Remove="ClientApp\src\app\components\water-dialog\water-dialog.component.ts" />
     <None Remove="ClientApp\src\app\fooditem.ts" />
     <None Remove="ClientApp\src\app\guards\auth.guard.ts" />
@@ -72,6 +73,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\components\add-food-item\add-food-item.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\mypage\mypage.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\components\new-user-info\new-user-info.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\components\water-dialog\water-dialog.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\guards\auth.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\fooditem.ts" />

@@ -4,6 +4,7 @@ import { Account, Role } from '../../models/account';
 import { RegistrationService } from '../../services/registration.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-components-registration',
@@ -12,7 +13,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegistrationComponent {
   @Input() newaccount = new Account()
-  @Input() newuser = new User()
+  //@Input() newuser = new User()
+  @Input() email: string
 
   constructor(private regService: RegistrationService,
     private authService: AuthService,
@@ -20,10 +22,12 @@ export class RegistrationComponent {
 
   registrate() {
     this.newaccount.role = Role.User;
-    this.regService.registrateAccount(this.newaccount)
-      .subscribe(data => {
-        this.authService.login(this.newaccount.username, this.newaccount.password);
-        this.router.navigate(["/mypage"])
-      })
+    this.newaccount.id = Guid.create().toString()
+    //this.regService.registrateAccount(this.newaccount)
+    //  .subscribe(data => {        
+    //    this.authService.login(this.newaccount.username, this.newaccount.password);
+    //    this.router.navigate(["/user-start-info", this.newaccount.username, this.email, this.newaccount.id])
+    //  })
+    this.router.navigate(["/user-start-info", this.newaccount.username, this.email, this.newaccount.id])
   }
 }
