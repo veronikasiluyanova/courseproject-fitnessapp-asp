@@ -17,6 +17,7 @@ import { NewUserInfoComponent } from './components/new-user-info/new-user-info.c
 
 import { FoodService } from './services/food.service';
 import { FoodTypeService } from './services/foodtype.service';
+import { GoalsService } from './services/goals.service';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -37,6 +38,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
+import { ActivityService } from './services/activity.service';
+import { UserService } from './services/user.service';
+import { RegistrationService } from './services/registration.service';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -61,7 +65,6 @@ export function tokenGetter() {
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
-      //{ path: 'home', component: HomeComponent },
       { path: 'food-info', component: FoodComponent, canActivate: [AuthGuard] },
       { path: 'add-food-item', component: AddFoodItemComponent, canActivate: [AuthGuard] },
       { path: 'mypage/:username', component: MyPageComponent, canActivate: [AuthGuard] },
@@ -81,6 +84,10 @@ export function tokenGetter() {
   providers: [
     FoodService,
     FoodTypeService,
+    GoalsService,
+    ActivityService,
+    UserService,
+    RegistrationService,
     CdkColumnDef,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
 

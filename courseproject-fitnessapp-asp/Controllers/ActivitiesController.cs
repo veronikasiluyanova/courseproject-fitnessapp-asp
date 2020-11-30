@@ -12,48 +12,48 @@ namespace courseproject_fitnessapp_asp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class ActivitiesController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public UsersController(ApplicationContext context)
+        public ActivitiesController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Activities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Activity>>> Getactivity()
         {
-            return await _context.users.ToListAsync();
+            return await _context.activity.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Activities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Activity>> GetActivity(int id)
         {
-            var user = await _context.users.FindAsync(id);
+            var activity = await _context.activity.FindAsync(id);
 
-            if (user == null)
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return activity;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Activities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutActivity(int id, Activity activity)
         {
-            if (id != user.id)
+            if (id != activity.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(activity).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace courseproject_fitnessapp_asp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!ActivityExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace courseproject_fitnessapp_asp.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Activities
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser([FromBody]User user)
+        public async Task<ActionResult<Activity>> PostActivity(Activity activity)
         {
-            _context.users.Add(user);
+            _context.activity.Add(activity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.id }, user);
+            return CreatedAtAction("GetActivity", new { id = activity.id }, activity);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Activities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Activity>> DeleteActivity(int id)
         {
-            var user = await _context.users.FindAsync(id);
-            if (user == null)
+            var activity = await _context.activity.FindAsync(id);
+            if (activity == null)
             {
                 return NotFound();
             }
 
-            _context.users.Remove(user);
+            _context.activity.Remove(activity);
             await _context.SaveChangesAsync();
 
-            return user;
+            return activity;
         }
 
-        private bool UserExists(int id)
+        private bool ActivityExists(int id)
         {
-            return _context.users.Any(e => e.id == id);
+            return _context.activity.Any(e => e.id == id);
         }
     }
 }

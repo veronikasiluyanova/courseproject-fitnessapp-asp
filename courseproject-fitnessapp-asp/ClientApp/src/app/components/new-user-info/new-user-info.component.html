@@ -5,103 +5,109 @@
       <mat-vertical-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
-            <!--<ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>-->
-            <mat-form-field  class="example-full-width form-group">
+            <mat-form-field class="example-full-width form-group">
               <mat-label>Имя пользователя</mat-label>
-              <input matInput id="username" disabled [matAutocomplete]="username" name="username" formControlName="usernameCtrl" required />
-             </mat-form-field>
-            <mat-form-field  class="example-full-width form-group">
-              <mat-label>Email</mat-label>
-              <input matInput id="email" disabled [matAutocomplete]="email" name="email" formControlName="emailCtrl" required />
+              <input matInput id="username" readonly formControlName="usernameCtrl" />
             </mat-form-field>
-            <mat-form-field  class="example-full-width form-group">
+            <mat-form-field class="example-full-width form-group">
+              <mat-label>Email</mat-label>
+              <input matInput id="email" readonly formControlName="emailCtrl" />
+            </mat-form-field>
+            <mat-form-field class=" form-group">
               <mat-label>Пол</mat-label>
-              <mat-radio-group aria-label="Select an option" [(ngModel)]="newuser.gender" name="gender" formControlName="genderCtrl" required >
-                <mat-radio-button value="F">Женский</mat-radio-button>
-                <mat-radio-button value="M">Мужской</mat-radio-button>
-              </mat-radio-group>
+              <mat-select id="gender" required formControlName="genderCtrl">
+                <mat-option value="F">Женский</mat-option>
+                <mat-option value="M">Мужской</mat-option>
+              </mat-select>
             </mat-form-field>
             <mat-form-field class="example-full-width form-group">
               <mat-label>Дата рождения</mat-label>
-              <input matInput id="bday" type="date" [(ngModel)]="newuser.birthday" name="birthday" formControlName="bdayCtrl" required />
-            </mat-form-field>
-              <div>
-                <button mat-button matStepperNext>Далее</button>
-              </div>
-          </form>
-        </mat-step>
-        <!--<mat-step [stepControl]="secondFormGroup">
-          <form>            
-            <mat-form-field>
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                     required>
+              <input matInput id="bday" type="date" formControlName="bdayCtrl" required />
             </mat-form-field>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperNext>Далее</button>
             </div>
           </form>
         </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup" *ngIf="goals">
+          <form [formGroup]="secondFormGroup">
+            <mat-form-field class="form-group">
+              <mat-label>Выберите цель</mat-label>
+              <mat-select id="goal" required formControlName="goalsCtrl">
+                <mat-option *ngFor="let g of goals" [value]="g.id">{{g.goal_name}}</mat-option>
+              </mat-select>
+            </mat-form-field> <br />
+            <mat-form-field class="example-full-width form-group">
+              <mat-label>Рост</mat-label>
+              <input matInput id="height" formControlName="heightCtrl" required />
+            </mat-form-field> <br />
+            <mat-form-field class="example-full-width form-group">
+              <mat-label>Начальный вес</mat-label>
+              <input matInput id="weight" formControlName="weightCtrl" required />
+            </mat-form-field> <br />
+            <mat-form-field class="example-full-width form-group">
+              <mat-label>Целевой вес</mat-label>
+              <input matInput id="goal_weight" formControlName="goalweightCtrl" />
+            </mat-form-field>
+            <div>
+              <button mat-button matStepperPrevious>Назад</button>
+              <button mat-button matStepperNext>Далее</button>
+            </div>
+          </form>
+        </mat-step>
+
         <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
+          <ng-template matStepLabel></ng-template>
+          <form [formGroup]="thirdFormGroup">
+            <mat-form-field class="example-full-width form-group">
+              <mat-label>Уровень активности</mat-label>
+              <mat-select id="activity" required formControlName="activityCtrl">
+                <mat-option *ngFor="let a of activities" [value]="a.id">{{a.activity_name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-button matStepperPrevious>Назад</button>
           </div>
         </mat-step>
       </mat-vertical-stepper>
-
-
-
-
-      <form>
-        <div>
-          <mat-form-field>
-            <mat-label class="required">Имя пользователя</mat-label>
-            <input matInput id="username" disabled [matAutocomplete]={{username}} name="username" />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label class="required">Email</mat-label>
-            <input matInput id="email" disabled [matAutocomplete]={{email}} name="email" />
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field>
-            <mat-label class="required">Пол</mat-label>
-            <mat-radio-group aria-label="Select an option" [(ngModel)]="newuser.gender" name="gender">
-              <mat-radio-button value="F">Женский</mat-radio-button>
-              <mat-radio-button value="M">Мужской</mat-radio-button>
-            </mat-radio-group>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label class="required">Дата рождения</mat-label>
-            <input matInput id="bday" type="date" [(ngModel)]="newuser.birthday" name="birthday" />
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width form-group">
-            <mat-label class="required">Углеводы</mat-label>
-            <input matInput id="carbs" placeholder="Углеводы" type="text" [(ngModel)]="newfooditem.carbs" name="carbs" />
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width form-group">
-            <mat-label class="required">Ккал</mat-label>
-            <input matInput id="kcal" placeholder="Ккал" type="text" [(ngModel)]="newfooditem.kcal" name="kcal" />
-          </mat-form-field>
-        </div>
-      </form>-->
-      </mat-vertical-stepper>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="addFoodItemClick()" type="submit">Добавить</button>
-      <button mat-stroked-button [routerLink]="['/food-info']">Отмена</button>
+      <button mat-raised-button color="primary" (click)="click()" type="submit">Далее</button>
+      <button mat-stroked-button [routerLink]="['/registration']">Отмена</button>
+    </mat-card-actions>
+    <mat-card-content *ngIf="show && bmr">
+      <p>Среднесуточная норма КБЖУ</p>
+      <form [formGroup]="finalFormGroup">
+        <mat-form-field class="form-group">
+          <mat-label>Килокалории</mat-label>
+          <input matInput id="kcal" formControlName="kcalCtrl" readonly />
+        </mat-form-field> <br />
+        <mat-form-field class="example-full-width form-group">
+          <mat-label>Белки</mat-label>
+          <input matInput id="prot" formControlName="protCtrl" readonly />
+        </mat-form-field> <br />
+        <mat-form-field class="example-full-width form-group">
+          <mat-label>Жиры</mat-label>
+          <input matInput id="fats" formControlName="fatsCtrl" readonly />
+        </mat-form-field> <br />
+        <mat-form-field class="example-full-width form-group">
+          <mat-label>Углеводы</mat-label>
+          <input matInput id="carbs" formControlName="carbsCtrl" readonly />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button (click)="submit()">Готово</button>
     </mat-card-actions>
   </mat-card>
 </div>
+
+<ng-template #firstDialog>
+  <h2 matDialogTitle>Готово!</h2>
+  <p matDialogContent>Теперь необходимо войти в систему</p>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose>ОК</button>
+  </mat-dialog-actions>
+</ng-template>

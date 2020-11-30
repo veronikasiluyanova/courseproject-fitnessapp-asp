@@ -10,11 +10,13 @@ export class User {
     public gender?: string,
     public birthday?: Date,
     public goal_id?: number,
+    public start_weight?: number,
     public goal_weight?: number,
+    public height?: number,
+    public activity?: number,
     public protein_norm?: number, 
     public fats_norm?: number, 
     public carbs_norm?: number, 
     public kcal_norm?: number, 
-    public additional_info?: string
   ) { }
 }

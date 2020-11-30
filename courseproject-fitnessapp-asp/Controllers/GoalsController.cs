@@ -12,48 +12,48 @@ namespace courseproject_fitnessapp_asp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class GoalsController : ControllerBase
     {
         private readonly ApplicationContext _context;
 
-        public UsersController(ApplicationContext context)
+        public GoalsController(ApplicationContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Goals
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Goal>>> GetGoal()
         {
-            return await _context.users.ToListAsync();
+            return await _context.goals.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Goals/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Goal>> GetGoal(int id)
         {
-            var user = await _context.users.FindAsync(id);
+            var goal = await _context.goals.FindAsync(id);
 
-            if (user == null)
+            if (goal == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return goal;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Goals/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutGoal(int id, Goal goal)
         {
-            if (id != user.id)
+            if (id != goal.id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(goal).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace courseproject_fitnessapp_asp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!GoalExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace courseproject_fitnessapp_asp.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Goals
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser([FromBody]User user)
+        public async Task<ActionResult<Goal>> PostGoal(Goal goal)
         {
-            _context.users.Add(user);
+            _context.goals.Add(goal);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.id }, user);
+            return CreatedAtAction("GetGoal", new { id = goal.id }, goal);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Goals/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Goal>> DeleteGoal(int id)
         {
-            var user = await _context.users.FindAsync(id);
-            if (user == null)
+            var goal = await _context.goals.FindAsync(id);
+            if (goal == null)
             {
                 return NotFound();
             }
 
-            _context.users.Remove(user);
+            _context.goals.Remove(goal);
             await _context.SaveChangesAsync();
 
-            return user;
+            return goal;
         }
 
-        private bool UserExists(int id)
+        private bool GoalExists(int id)
         {
-            return _context.users.Any(e => e.id == id);
+            return _context.goals.Any(e => e.id == id);
         }
     }
 }
