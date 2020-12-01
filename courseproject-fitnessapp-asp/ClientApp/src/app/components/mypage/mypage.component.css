@@ -33,11 +33,11 @@ h4 {
 
 .mainInfo {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around; 
 }
 
-.testCard {
+.paramsCard {
   width: 35vw;
   height: 20%;
 }

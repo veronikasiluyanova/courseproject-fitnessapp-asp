@@ -5,8 +5,11 @@
       <span id="loginLink">
         <a routerLink="/">Войти</a>
       </span>
-      <form>
+      <form>        
         <div>
+          <p *ngIf="errorUsername" class="error">
+            Имя пользователя уже используется
+          </p>
           <mat-form-field>
             <input matInput type="text" placeholder="Имя пользователя" [(ngModel)]="newaccount.username" name="username" #username />
           </mat-form-field>

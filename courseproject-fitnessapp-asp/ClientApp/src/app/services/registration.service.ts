@@ -12,4 +12,8 @@ constructor(private http: HttpClient) { }
   registrateAccount(newaccount: Account) {
     return this.http.post(this.url, newaccount)
   }
+
+  getAllAccounts() {
+    return this.http.get<Account[]>(this.url + '/');
+  }
 }

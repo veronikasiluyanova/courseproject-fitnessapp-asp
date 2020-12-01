@@ -3,7 +3,7 @@
 </h2>
 
 <div>
-  <button mat-raised-button color="primary" [routerLink]="['/add-food-item']">Добавить продукт</button>
+  <button mat-raised-button color="primary" *ngIf="isAdmin" [routerLink]="['/add-food-item']">Добавить продукт</button>
 </div>
 
 <div>

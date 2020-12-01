@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 import { Token } from '../models/token';
 
 export const ACCESS_TOKEN_KEY = 'fitnessapp_access_token'
+export const CURRENT_USERNAME = ''
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class AuthService {
     }).pipe(
       tap(token => {
         localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token)
+        localStorage.setItem(CURRENT_USERNAME, username)
       })
     )
   }

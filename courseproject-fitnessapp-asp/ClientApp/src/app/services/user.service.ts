@@ -12,4 +12,20 @@ export class UserService {
   registrateUser(newuser: User) {
     return this.http.post(this.url, newuser);
   }
+
+  getAllUsers() {
+    return this.http.get<User[]>(this.url + '/');
+  }
+
+  getUser(id: number) {
+    return this.http.get(this.url + '/' + id);
+  }
+
+  updateUser(user: User) {
+    return this.http.put(this.url, user);
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(this.url + '/' + id);
+  }
 }

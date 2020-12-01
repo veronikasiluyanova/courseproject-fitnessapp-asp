@@ -12,6 +12,7 @@ namespace courseproject_fitnessapp_asp
         public DbSet<User> users { get; set; }
         public DbSet<Goal> goals { get; set; }
         public DbSet<Activity> activity { get; set; }
+        public DbSet<Measurement> measurement { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
              : base(options) { }
@@ -26,6 +27,7 @@ namespace courseproject_fitnessapp_asp
             ChangeTracker.DetectChanges();
             return base.SaveChanges();
         }
+
 
     }
 }

@@ -14,10 +14,15 @@ import { WaterDialogComponent } from './components/water-dialog/water-dialog.com
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { NewUserInfoComponent } from './components/new-user-info/new-user-info.component';
+import { MeasurementDialogComponent } from './components/measurement-dialog/measurement-dialog.component';
 
 import { FoodService } from './services/food.service';
 import { FoodTypeService } from './services/foodtype.service';
 import { GoalsService } from './services/goals.service';
+import { ActivityService } from './services/activity.service';
+import { UserService } from './services/user.service';
+import { RegistrationService } from './services/registration.service';
+import { MeasurementService } from './services/measurement.service';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -38,9 +43,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
-import { ActivityService } from './services/activity.service';
-import { UserService } from './services/user.service';
-import { RegistrationService } from './services/registration.service';
+import { DialogService } from './services/dialog.service';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -57,7 +60,8 @@ export function tokenGetter() {
     WaterDialogComponent,
     LoginComponent,
     RegistrationComponent,
-    NewUserInfoComponent
+    NewUserInfoComponent,
+    MeasurementDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
@@ -67,7 +71,7 @@ export function tokenGetter() {
       { path: '', component: LoginComponent },
       { path: 'food-info', component: FoodComponent, canActivate: [AuthGuard] },
       { path: 'add-food-item', component: AddFoodItemComponent, canActivate: [AuthGuard] },
-      { path: 'mypage/:username', component: MyPageComponent, canActivate: [AuthGuard] },
+      { path: 'mypage', component: MyPageComponent, canActivate: [AuthGuard] },
       { path: 'registration', component: RegistrationComponent },
       { path: 'user-start-info/:username/:email/:account_id', component: NewUserInfoComponent }
     ]),
@@ -88,11 +92,13 @@ export function tokenGetter() {
     ActivityService,
     UserService,
     RegistrationService,
+    MeasurementService,
+    DialogService,
     CdkColumnDef,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [WaterDialogComponent]
+  entryComponents: [WaterDialogComponent, MeasurementDialogComponent]
 })
 export class AppModule { }

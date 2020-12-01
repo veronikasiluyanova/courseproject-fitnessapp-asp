@@ -1,0 +1,33 @@
+<div mat-dialog-content>
+  <p>Обновление параметров.</p>
+  <mat-form-field>
+    <mat-label>Дата</mat-label>
+    <input matInput type="date" [(ngModel)]="data.date_measurement">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Рост</mat-label>
+    <input matInput [(ngModel)]="data.height">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Вес</mat-label>
+    <input matInput [(ngModel)]="data.weight">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Грудь</mat-label>
+    <input matInput [(ngModel)]="data.chest">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Талия</mat-label>
+    <input matInput [(ngModel)]="data.waist">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Бедра</mat-label>
+    <input matInput [(ngModel)]="data.hip">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    Установить
+  </button>
+  <button mat-button mat-dialog-close>Отмена</button>
+</div>

@@ -2,31 +2,36 @@
   <div class="infocontainer">
     <mat-card class="infoCard">
       <div class="mainInfo">
-        <h3 class="username">
+        <h3 class="username" *ngIf="username">
           {{username}}
         </h3>
-        <div class="weightInfo">
+        <!--<div class="weightInfo">-->
           <p>
             <mat-label>Цель</mat-label> <br />
             ...
           </p>
-          <p>
+          <p *ngIf="start_weight">
             <mat-label>Начальный вес</mat-label> <br />
-            ..kg
+            {{start_weight}}
           </p>
           <p>
             <mat-label>Текущий вес</mat-label> <br />
-            ..kg
+            {{current_weight}}
           </p>
-          <p>
+          <p *ngIf="goal_weight">
             <mat-label>Целевой вес?</mat-label> <br />
-            ..kg
+            {{goal_weight}}
           </p>
-        </div>
+        <!--</div>-->
       </div>
     </mat-card>
-    <mat-card class="testCard">
-
+    <mat-card class="paramsCard">
+      <button mat-button (click)="updateMeasurement()">
+        Обновить параметры
+      </button>
+      <button mat-button (click)="showProgress()">
+        Прогресс
+      </button>
     </mat-card>
   </div>
 
@@ -52,9 +57,40 @@
         </button>
       </div>
 
-      <button mat-button (click)="openDialog()">Установить норму</button>
+      <button mat-button (click)="openDialog()">
+        Установить норму
+      </button>
       <mat-label *ngIf="water">{{water}}</mat-label>
     </mat-card>
   </div>
-
 </div>
+
+<!--<ng-template #callAPIDialog>
+  <form #userForm="ngForm" (ngSubmit)="onSend(userForm)">
+    <p>Обновление параметров.</p>
+    <mat-form-field>
+      <mat-label>Рост</mat-label>
+      <input mat-input placeholder="Рост" [(ngModel)]="newmeasurement.height" name="height" [ngModelOptions]="{standalone: true}">
+    </mat-form-field><br />
+    <mat-form-field>
+      <mat-label>Вес</mat-label>
+      <input mat-input placeholder="Вес" [(ngModel)]="newmeasurement.weight" name="weight" [ngModelOptions]="{standalone: true}">
+    </mat-form-field><br />
+    <mat-form-field>
+      <mat-label>Грудь</mat-label>
+      <input mat-input placeholder="Грудь" [(ngModel)]="newmeasurement.chest" name="chest" [ngModelOptions]="{standalone: true}">
+    </mat-form-field><br />
+    <mat-form-field>
+      <mat-label>Талия</mat-label> 
+      <input mat-input placeholder="Талия" [(ngModel)]="newmeasurement.waist" name="waist" [ngModelOptions]="{standalone: true}">
+    </mat-form-field><br />
+    <mat-form-field>
+      <mat-label>Бедра</mat-label>
+      <input mat-input placeholder="Бедра" [(ngModel)]="newmeasurement.hip" name="hip" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose="no">Отмена</button>
+      <button type="submit" mat-button>Подтвердить</button>
+    </mat-dialog-actions>
+  </form>
+</ng-template>-->

@@ -22,7 +22,7 @@ export class LoginComponent {
   login(username: string, password: string) {
     this.authService.login(username, password)
       .subscribe(res => {
-        this.router.navigate(["/mypage", this.currentaccount.username])
+        this.router.navigate(["/mypage"])
       }, error => {
         console.log(error)
         this.error = 'Неправильный логин или пароль.'

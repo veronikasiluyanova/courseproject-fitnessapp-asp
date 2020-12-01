@@ -32,7 +32,6 @@ export class NewUserInfoComponent implements OnInit {
   age: number
   coeff: number
   activity: Activity
-
   bmr: number
   protein: number
   fats: number

@@ -7,7 +7,7 @@ namespace courseproject_fitnessapp_asp.Data
     {
         [Key]
         public int id { get; set; }
-        public Guid account_id { get; set; }
+        public string account_id { get; set; }
         public string email { get; set; }
         public string username { get; set; }
         public string gender { get; set; }
