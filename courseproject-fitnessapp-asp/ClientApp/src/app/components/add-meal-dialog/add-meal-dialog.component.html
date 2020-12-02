@@ -1,0 +1,54 @@
+<div mat-dialog-content>
+  <p>З</p>
+  <mat-form-field>
+    <mat-label>Продукт</mat-label>
+    <input matInput placeholder="Поиск" (keyup)="search($event.target.value)" [value]="[data.name]"/>
+  </mat-form-field><br />
+  <mat-table matSort *ngIf="allFood && foodTypes" [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Продукт (100г) </th>
+      <td mat-cell *matCellDef="let f"> {{f.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="food_type_id">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Тип </th>
+      <td  mat-cell *matCellDef="let f"> {{foodTypes[f.food_type_id-1].food_type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="protein">
+      <th mat-header-cell *matHeaderCellDef> Белки (г) </th>
+      <td mat-cell *matCellDef="let f"> {{f.protein}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fats">
+      <th mat-header-cell *matHeaderCellDef> Жиры (г) </th>
+      <td mat-cell *matCellDef="let f"> {{f.fats}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="carbs">
+      <th mat-header-cell *matHeaderCellDef> Углеводы (г) </th>
+      <td mat-cell *matCellDef="let f"> {{f.carbs}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="kcal">
+      <th mat-header-cell *matHeaderCellDef> Ккал </th>
+      <td mat-cell  *matCellDef="let f"> {{f.kcal}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></tr>
+
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 7]" showFirstLastButtons ></mat-paginator>
+  <mat-form-field>
+    <mat-label>Количество (г)</mat-label>
+    <input matInput [(ngModel)]="data.gramms" />
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+    Сохранить
+  </button>
+  <button mat-button mat-dialog-close>Отмена</button>
+</div>

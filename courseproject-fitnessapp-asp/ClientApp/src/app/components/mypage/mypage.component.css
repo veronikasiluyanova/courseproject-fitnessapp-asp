@@ -5,6 +5,7 @@ h4 {
   width: 100%;
   text-align: center;
 }
+
 .username{
   width: auto;
 }
@@ -28,18 +29,28 @@ h4 {
   justify-content: center;
   align-content: center;
   width: 35vw;
-  height: 78%;
+  height: 58%;
 }
 
 .mainInfo {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+.profile {
+  display: flex;
   flex-direction: column;
-  justify-content: space-around; 
+}
+.weightInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .paramsCard {
   width: 35vw;
-  height: 20%;
+  height: 40%;
 }
 
 .diarywatercontainer {
@@ -51,12 +62,31 @@ h4 {
 
 .diaryCard {
   width: 35vw;
-  height: 58%;
+  height: 68%;
+  display: flex;
+  flex-direction: column;
+}
+.diaryData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 90%;
+}
+.diaryDataHeaders {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.diaryDataContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 70%;
 }
 
 .waterCard {
   width: 35vw;
-  height: 40%;
+  height: 30%;
 }
 
 #rectangle {

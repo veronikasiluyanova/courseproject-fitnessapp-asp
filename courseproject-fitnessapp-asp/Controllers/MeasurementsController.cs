@@ -25,6 +25,18 @@ namespace courseproject_fitnessapp_asp.Controllers
             return await _context.measurement.ToListAsync();
         }
 
+        [HttpGet("{id}"), Route("GetCurrentMeasurement/{id}")]
+        public ActionResult<Measurement> GetCurrentMeasurement(int id)
+        {
+            var list = _context.measurement.ToList().Where(i => i.user_id == id).OrderBy(i => i.date_measurement).FirstOrDefault();
+            //if (list == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return list;
+        }
+
         // GET: api/Measurements/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Measurement>> GetMeasurement(int id)
@@ -33,7 +45,7 @@ namespace courseproject_fitnessapp_asp.Controllers
 
             if (measurement == null)
             {
-                return NotFound();
+                return null;
             }
 
             return measurement;

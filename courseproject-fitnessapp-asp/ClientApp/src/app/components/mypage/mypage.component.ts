@@ -6,8 +6,9 @@ import { UserService } from '../../services/user.service';
 import { CURRENT_USERNAME } from '../../services/auth.service';
 import { Measurement } from '../../models/measurement';
 import { MeasurementService } from '../../services/measurement.service';
-import { DialogService } from '../../services/dialog.service';
+import { MeasurementDialogService } from '../../services/measurement-dialog.service';
 import { DatePipe } from '@angular/common';
+import { AddMealDialogService } from '../../services/add-meal-dialog.service';
 
 @Component({
   selector: 'app-components-mypage',
@@ -16,7 +17,7 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class MyPageComponent implements OnInit {
-  water: string
+  waterNorm: string
   username: string
   start_weight: number
   current_weight: number
@@ -31,20 +32,29 @@ export class MyPageComponent implements OnInit {
 
   public allUsers: User[]
   public currentuser: User
-
   public newmeasurement: Measurement
+  public path: string  
+
+  public breakfastFood = ""
+  public lunchFood = ""
+  public dinnerFood = ""
+  public snackFood = ""
 
   @ViewChild('callAPIDialog', { static: true }) callAPIDialog: TemplateRef<any>
 
   constructor(public dialog: MatDialog,
     private userService: UserService,
     private measurementService: MeasurementService,
-    public dialogService: DialogService) {
+    public dialogService: MeasurementDialogService,
+    public addMealDialogServicfe: AddMealDialogService) {
+
     this.username = localStorage.getItem(CURRENT_USERNAME)
     this.userService.getAllUsers().subscribe(data => {
       this.currentuser = data.find(user => user.username === this.username)
       this.start_weight = this.currentuser.start_weight
       this.goal_weight = this.currentuser.goal_weight
+     // measurementService.getCurrent(this.currentuser.id).subscribe(data => { this.current_weight = (data.weight ? data.weight : this.currentuser.start_weight) })
+      this.path = (this.currentuser.gender === "F") ? "../../../assets/images/female.jpg" : "../../../assets/images/male.jpg"
     })
   }
 
@@ -55,11 +65,11 @@ export class MyPageComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(WaterDialogComponent, {
       width: '50%',
-      data: { water: this.water }
+      data: { water: this.waterNorm }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.water = result
+      this.waterNorm = result
     });
     
   }
@@ -81,6 +91,30 @@ export class MyPageComponent implements OnInit {
   } 
 
   showProgress() {
+
+  }
+
+  increaseValue() {
+
+  }
+
+  decreaseValue() {
+
+  }
+
+  addBreakfast() {
+    this.addMealDialogServicfe.openDialog().subscribe()
+  }
+
+  addLunch() {
+
+  }
+
+  addDinner() {
+
+  }
+
+  addSnack() {
 
   }
 }

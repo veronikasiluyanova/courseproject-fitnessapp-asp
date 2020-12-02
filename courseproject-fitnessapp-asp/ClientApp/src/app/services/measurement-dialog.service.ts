@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { MeasurementDialogComponent } from '../components/measurement-dialog/measurement-dialog.component';
 
 @Injectable()
-export class DialogService {
+export class MeasurementDialogService {
   weight: string
   height: string
   chest: string

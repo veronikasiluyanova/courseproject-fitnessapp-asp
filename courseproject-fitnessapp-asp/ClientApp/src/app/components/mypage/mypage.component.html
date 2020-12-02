@@ -1,16 +1,16 @@
-<div class="pagecontainer">
+<div class="pagecontainer" *ngIf="username && start_weight && goal_weight ">
+  <!--&& current_weight-->
   <div class="infocontainer">
     <mat-card class="infoCard">
       <div class="mainInfo">
-        <h3 class="username" *ngIf="username">
-          {{username}}
-        </h3>
-        <!--<div class="weightInfo">-->
+        <div class="profile">
+          <img src={{path}} />
+          <h4 class="username">
+            {{username}}
+          </h4>
+        </div>
+        <div class="weightInfo">
           <p>
-            <mat-label>Цель</mat-label> <br />
-            ...
-          </p>
-          <p *ngIf="start_weight">
             <mat-label>Начальный вес</mat-label> <br />
             {{start_weight}}
           </p>
@@ -18,11 +18,11 @@
             <mat-label>Текущий вес</mat-label> <br />
             {{current_weight}}
           </p>
-          <p *ngIf="goal_weight">
-            <mat-label>Целевой вес?</mat-label> <br />
+          <p>
+            <mat-label>Целевой вес</mat-label> <br />
             {{goal_weight}}
           </p>
-        <!--</div>-->
+        </div>
       </div>
     </mat-card>
     <mat-card class="paramsCard">
@@ -39,7 +39,55 @@
     <mat-card class="diaryCard">
       <h4>Дневник питания</h4>
       <div class="diaryData">
+        <div class="diaryDataHeaders">
+          <div id="breakfastHeader">
+            <span>Завтрак</span><br />
+            <button mat-icon-button id="addBtn" (click)="addBreakfast()">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
 
+          <div id="lunchHeader">
+            <span>Обед</span><br />
+            <button mat-icon-button id="addBtn" (click)="addLunch()">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+
+          <div id="dinnerHeader">
+            <span>Ужин</span><br />
+            <button mat-icon-button id="addBtn" (click)="addDinnner()">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+
+          <div id="snackHeader">
+            <span>Перекус</span><br />
+            <button mat-icon-button id="addBtn" (click)="addSnack()">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="diaryDataContent">
+          <div id="breakfastContent">
+            {{breakfastFood}}
+          </div>
+
+          <div id="lunchContent">
+            {{lunchFood}}
+          </div>
+
+          <div id="dinnerContent">
+            {{dinnerFood}}
+          </div>
+
+          <div id="snackContent">
+            {{snackFood}}
+          </div>
+        </div>
+      </div>
+      <div class="diaryFooter">
+        ИТОГО:
       </div>
     </mat-card>
 
@@ -49,10 +97,10 @@
       <div id="rectangle"></div>
 
       <div class="incdecBtns">
-        <button mat-icon-button class="incrBtn">
+        <button mat-icon-button class="incrBtn" (click)="increaseValue()">
           <mat-icon>add_circle</mat-icon>
         </button>
-        <button mat-icon-button class="decrBtn">
+        <button mat-icon-button class="decrBtn" (click)="decreaseValue">
           <mat-icon>remove_circle</mat-icon>
         </button>
       </div>
@@ -64,33 +112,3 @@
     </mat-card>
   </div>
 </div>
-
-<!--<ng-template #callAPIDialog>
-  <form #userForm="ngForm" (ngSubmit)="onSend(userForm)">
-    <p>Обновление параметров.</p>
-    <mat-form-field>
-      <mat-label>Рост</mat-label>
-      <input mat-input placeholder="Рост" [(ngModel)]="newmeasurement.height" name="height" [ngModelOptions]="{standalone: true}">
-    </mat-form-field><br />
-    <mat-form-field>
-      <mat-label>Вес</mat-label>
-      <input mat-input placeholder="Вес" [(ngModel)]="newmeasurement.weight" name="weight" [ngModelOptions]="{standalone: true}">
-    </mat-form-field><br />
-    <mat-form-field>
-      <mat-label>Грудь</mat-label>
-      <input mat-input placeholder="Грудь" [(ngModel)]="newmeasurement.chest" name="chest" [ngModelOptions]="{standalone: true}">
-    </mat-form-field><br />
-    <mat-form-field>
-      <mat-label>Талия</mat-label> 
-      <input mat-input placeholder="Талия" [(ngModel)]="newmeasurement.waist" name="waist" [ngModelOptions]="{standalone: true}">
-    </mat-form-field><br />
-    <mat-form-field>
-      <mat-label>Бедра</mat-label>
-      <input mat-input placeholder="Бедра" [(ngModel)]="newmeasurement.hip" name="hip" [ngModelOptions]="{standalone: true}">
-    </mat-form-field>
-    <mat-dialog-actions align="end">
-      <button mat-button matDialogClose="no">Отмена</button>
-      <button type="submit" mat-button>Подтвердить</button>
-    </mat-dialog-actions>
-  </form>
-</ng-template>-->

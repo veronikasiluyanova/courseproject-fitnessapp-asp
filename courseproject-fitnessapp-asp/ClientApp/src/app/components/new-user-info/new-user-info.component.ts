@@ -8,6 +8,8 @@ import { Activity } from '../../models/activity';
 import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Measurement } from '../../models/measurement';
+import { MeasurementService } from '../../services/measurement.service';
 
 @Component({
   selector: 'app-components-new-user-info',
@@ -22,6 +24,7 @@ export class NewUserInfoComponent implements OnInit {
 
   public goals: Goals[]
   public activities: Activity[]
+  public allUsers: User[]
 
   @Input() newuser = new User()
   username: string
@@ -37,6 +40,8 @@ export class NewUserInfoComponent implements OnInit {
   fats: number
   carbs: number
 
+  firstmeasurement = new Measurement()
+
   @ViewChild('firstDialog', { static: true })
   firstDialog: TemplateRef<any>;
 
@@ -46,10 +51,14 @@ export class NewUserInfoComponent implements OnInit {
     private activityService: ActivityService,
     private userService: UserService,
     private router: Router,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private measurementService: MeasurementService) {
     this.username = this.route.snapshot.params["username"]
     this.email = this.route.snapshot.params["email"]
     this.account_id = this.route.snapshot.params["account_id"]
+    userService.getAllUsers().subscribe(data => {
+      this.allUsers = data
+    })
   }
 
   ngOnInit(): void {
@@ -116,14 +125,24 @@ export class NewUserInfoComponent implements OnInit {
     this.newuser.protein_norm = this.finalFormGroup.get("protCtrl").value
     this.newuser.fats_norm = this.finalFormGroup.get("fatsCtrl").value
     this.newuser.carbs_norm = this.finalFormGroup.get("carbsCtrl").value
+
+    //this.firstmeasurement.height = +this.secondFormGroup.get("heightCtrl").value
+    //this.firstmeasurement.weight = +this.secondFormGroup.get("weightCtrl").value
+    //this.firstmeasurement.date_measurement = new Date(Date.now())
+    //this.firstmeasurement.chest = 0
+    //this.firstmeasurement.waist = 0
+    //this.firstmeasurement.hip = 0
+    //this.firstmeasurement.user_id = 
   }
 
   submit() {
     console.log(this.newuser)
+    console.log(this.firstmeasurement)
     this.userService.registrateUser(this.newuser)
       .subscribe(data => {
-          this.router.navigate(["/"])
-    })
+        //this.measurementService.addMeasurement(this.firstmeasurement).subscribe()
+        this.router.navigate(["/"])
+      })
     this.dialog.open(this.firstDialog);
   }
 

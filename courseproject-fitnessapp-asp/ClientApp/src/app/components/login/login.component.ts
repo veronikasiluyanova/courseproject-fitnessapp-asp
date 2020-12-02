@@ -12,6 +12,8 @@ export class LoginComponent {
   @Input() currentaccount = new Account()
   error: string
 
+  allAcc: Account[]
+
   constructor(private authService: AuthService,
     private router: Router) { }
 
@@ -21,7 +23,7 @@ export class LoginComponent {
 
   login(username: string, password: string) {
     this.authService.login(username, password)
-      .subscribe(res => {
+      .subscribe(res => {        
         this.router.navigate(["/mypage"])
       }, error => {
         console.log(error)

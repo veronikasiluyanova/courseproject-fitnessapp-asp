@@ -43,7 +43,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
-import { DialogService } from './services/dialog.service';
+import { MeasurementDialogService } from './services/measurement-dialog.service';
+import { AccountService } from './services/account.service';
+import { AddMealDialogComponent } from './components/add-meal-dialog/add-meal-dialog.component';
+import { AddMealDialogService } from './services/add-meal-dialog.service';
+import { MatSortModule, MatPaginatorModule } from '@angular/material';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
@@ -61,7 +65,8 @@ export function tokenGetter() {
     LoginComponent,
     RegistrationComponent,
     NewUserInfoComponent,
-    MeasurementDialogComponent
+    MeasurementDialogComponent,
+    AddMealDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
@@ -76,7 +81,8 @@ export function tokenGetter() {
       { path: 'user-start-info/:username/:email/:account_id', component: NewUserInfoComponent }
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
-    MatIconModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatStepperModule,
+    MatIconModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatStepperModule, MatSortModule,
+    MatPaginatorModule,
 
     JwtModule.forRoot({
       config: {
@@ -93,12 +99,14 @@ export function tokenGetter() {
     UserService,
     RegistrationService,
     MeasurementService,
-    DialogService,
+    MeasurementDialogService,
+    AccountService,
+    AddMealDialogService,
     CdkColumnDef,
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } },
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [WaterDialogComponent, MeasurementDialogComponent]
+  entryComponents: [WaterDialogComponent, MeasurementDialogComponent, AddMealDialogComponent]
 })
 export class AppModule { }

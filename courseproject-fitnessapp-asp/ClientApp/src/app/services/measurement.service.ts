@@ -20,4 +20,8 @@ export class MeasurementService {
   getMeasurement(id: number) {
     return this.http.get(this.url + '/' + id);
   }
+
+  getCurrent(user_id: number) {
+    return this.http.get<Measurement>(this.url + '/GetCurrentMeasurement/' + user_id)
+  }
 }
