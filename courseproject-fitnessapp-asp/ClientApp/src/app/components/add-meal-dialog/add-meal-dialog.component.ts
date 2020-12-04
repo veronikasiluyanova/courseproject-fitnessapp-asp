@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild, OnInit } from "@angular/core";
+import { Component, Inject, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialog, MatTableDataSource, MatSort, MatPaginator } from "@angular/material";
 import { FoodService } from "../../services/food.service";
 import { FoodItem } from "../../models/fooditem";

@@ -4,10 +4,10 @@
     <mat-card class="infoCard">
       <div class="mainInfo">
         <div class="profile">
-          <img src={{path}} />
           <h4 class="username">
             {{username}}
           </h4>
+          <img src={{path}} />
         </div>
         <div class="weightInfo">
           <p>
@@ -26,10 +26,10 @@
       </div>
     </mat-card>
     <mat-card class="paramsCard">
-      <button mat-button (click)="updateMeasurement()">
+      <button mat-raised-button color="primary" (click)="updateMeasurement()">
         Обновить параметры
       </button>
-      <button mat-button (click)="showProgress()">
+      <button mat-raised-button color="primary" (click)="showProgress()">
         Прогресс
       </button>
     </mat-card>
@@ -56,7 +56,7 @@
 
           <div id="dinnerHeader">
             <span>Ужин</span><br />
-            <button mat-icon-button id="addBtn" (click)="addDinnner()">
+            <button mat-icon-button id="addBtn" (click)="addDinner()">
               <mat-icon>add_circle</mat-icon>
             </button>
           </div>
@@ -69,46 +69,50 @@
           </div>
         </div>
         <div class="diaryDataContent">
-          <div id="breakfastContent">
+          <div id="breakfastContent" class="mealContent">
             {{breakfastFood}}
           </div>
 
-          <div id="lunchContent">
+          <div id="lunchContent" class="mealContent">
             {{lunchFood}}
           </div>
 
-          <div id="dinnerContent">
+          <div id="dinnerContent" class="mealContent">
             {{dinnerFood}}
           </div>
 
-          <div id="snackContent">
+          <div id="snackContent" class="mealContent">
             {{snackFood}}
           </div>
         </div>
       </div>
-      <div class="diaryFooter">
-        ИТОГО:
-      </div>
+      <mat-card-footer class="diaryFooter">
+        <span>{{totalString}}</span>
+        <button mat-raised-button color="primary" id="moreBtn" (click)="openMore()">Подробнее</button>
+      </mat-card-footer>
     </mat-card>
 
     <mat-card class="waterCard">
-      <h4>Вода</h4>
+      <h4>Водный баланс</h4>
+      <div class="waterCardContent">
+        <div>
+          <div *ngIf="waterNorm !== 0">
+            <span>{{waterTotal}}</span>/<span>{{waterNorm}}</span>
+          </div>
 
-      <div id="rectangle"></div>
-
-      <div class="incdecBtns">
-        <button mat-icon-button class="incrBtn" (click)="increaseValue()">
-          <mat-icon>add_circle</mat-icon>
-        </button>
-        <button mat-icon-button class="decrBtn" (click)="decreaseValue">
-          <mat-icon>remove_circle</mat-icon>
+          <div class="incdecBtns">
+            <button mat-icon-button class="incrBtn" (click)="increaseValue()">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+            <button mat-icon-button class="decrBtn" (click)="decreaseValue()">
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          Обновить норму
         </button>
       </div>
-
-      <button mat-button (click)="openDialog()">
-        Установить норму
-      </button>
-      <mat-label *ngIf="water">{{water}}</mat-label>
     </mat-card>
   </div>
 </div>

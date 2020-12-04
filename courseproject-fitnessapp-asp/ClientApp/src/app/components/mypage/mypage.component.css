@@ -84,9 +84,26 @@ h4 {
   width: 70%;
 }
 
+.diaryFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 3px;
+}
+
 .waterCard {
   width: 35vw;
   height: 30%;
+}
+
+.waterCardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.mealContent {
+  font-size: 12px;
 }
 
 #rectangle {

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp.Data;
+using System;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
@@ -18,6 +19,13 @@ namespace courseproject_fitnessapp_asp.Controllers
             _context = context;
         }
 
+        [Route("GetChartsData")]
+        [HttpGet]
+        public object GetChartsData()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(_context.measurement.ToList());
+        }
+
         // GET: api/Measurements
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Measurement>>> GetMeasurement()
@@ -25,16 +33,10 @@ namespace courseproject_fitnessapp_asp.Controllers
             return await _context.measurement.ToListAsync();
         }
 
-        [HttpGet("{id}"), Route("GetCurrentMeasurement/{id}")]
+        [HttpGet, Route("GetCurrentMeasurement/{id}")]
         public ActionResult<Measurement> GetCurrentMeasurement(int id)
         {
-            var list = _context.measurement.ToList().Where(i => i.user_id == id).OrderBy(i => i.date_measurement).FirstOrDefault();
-            //if (list == null)
-            //{
-            //    return NotFound();
-            //}
-
-            return list;
+            return _context.measurement.ToList().Where(i => i.user_id == id).OrderByDescending(j => j.date_measurement).First();
         }
 
         // GET: api/Measurements/5

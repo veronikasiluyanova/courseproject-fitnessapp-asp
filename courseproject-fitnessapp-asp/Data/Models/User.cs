@@ -21,5 +21,6 @@ namespace courseproject_fitnessapp_asp.Data
         public float fats_norm { get; set; }
         public float carbs_norm { get; set; }
         public float kcal_norm { get; set; }
+        public float water_norm { get; set; }
     }
 }

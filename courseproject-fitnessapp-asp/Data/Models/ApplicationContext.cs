@@ -1,4 +1,5 @@
 ﻿using courseproject_fitnessapp_asp.Data;
+using courseproject_fitnessapp_asp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,6 +14,8 @@ namespace courseproject_fitnessapp_asp
         public DbSet<Goal> goals { get; set; }
         public DbSet<Activity> activity { get; set; }
         public DbSet<Measurement> measurement { get; set; }
+        public DbSet<FoodDiaryRecord> fooddiary { get; set; }
+        public DbSet<WaterDiaryRecord> waterdiary { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
              : base(options) { }

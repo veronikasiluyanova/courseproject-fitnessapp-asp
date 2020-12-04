@@ -6,11 +6,9 @@ import { Router } from '@angular/router';
 //import { AUTH_API_URL } from '../app-injection-tokens';
 import { tap } from 'rxjs/operators';
 import { Token } from '../models/token';
-import { Account } from '../models/account';
-
+import { UserService } from './user.service';
 export const ACCESS_TOKEN_KEY = 'fitnessapp_access_token'
-export const CURRENT_USERNAME = ''
-
+export const ID = ''
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +18,18 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-    private router: Router) {  }
+    private router: Router,
+    private userService: UserService) { }
 
   login(username: string, password: string): Observable<Token> {
     return this.http.post<Token>('api/auth/Login', {
       username, password
     }).pipe(
       tap(token => {
-        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token)
-        localStorage.setItem(CURRENT_USERNAME, username)
-        console.log(CURRENT_USERNAME)
+        localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token);
+        this.userService.getAllUsers().subscribe(date => {
+          localStorage.setItem(ID, date.find(u => u.username === username).id.toString());
+        });
       })
     )
   }

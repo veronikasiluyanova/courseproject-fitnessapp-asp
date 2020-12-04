@@ -17,6 +17,7 @@ export class User {
     public protein_norm?: number, 
     public fats_norm?: number, 
     public carbs_norm?: number, 
-    public kcal_norm?: number, 
+    public kcal_norm?: number,
+    public water_norm?: number
   ) { }
 }

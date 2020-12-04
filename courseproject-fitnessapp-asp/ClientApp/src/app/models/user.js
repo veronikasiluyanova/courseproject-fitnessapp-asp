@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var User = /** @class */ (function () {
     function User(id, 
     // public account_id?: Guid,
-    account_id, email, username, gender, birthday, goal_id, start_weight, goal_weight, height, activity, protein_norm, fats_norm, carbs_norm, kcal_norm) {
+    account_id, email, username, gender, birthday, goal_id, start_weight, goal_weight, height, activity, protein_norm, fats_norm, carbs_norm, kcal_norm, water_norm) {
         this.id = id;
         this.account_id = account_id;
         this.email = email;
@@ -19,6 +19,7 @@ var User = /** @class */ (function () {
         this.fats_norm = fats_norm;
         this.carbs_norm = carbs_norm;
         this.kcal_norm = kcal_norm;
+        this.water_norm = water_norm;
     }
     return User;
 }());

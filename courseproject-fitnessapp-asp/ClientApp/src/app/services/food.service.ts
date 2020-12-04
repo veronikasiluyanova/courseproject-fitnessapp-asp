@@ -15,7 +15,7 @@ export class FoodService {
   }
 
   getFoodItem(id: number) {
-    return this.http.get(this.url + '/' + id);
+    return this.http.get<FoodItem>(this.url + '/' + id);
   }
 
   createFoodItem(newitem: FoodItem) {

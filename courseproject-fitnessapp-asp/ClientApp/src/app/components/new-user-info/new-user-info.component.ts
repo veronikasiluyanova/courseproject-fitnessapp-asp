@@ -25,6 +25,8 @@ export class NewUserInfoComponent implements OnInit {
   public goals: Goals[]
   public activities: Activity[]
   public allUsers: User[]
+  currentuser: User
+  currentusername: string
 
   @Input() newuser = new User()
   username: string
@@ -52,14 +54,7 @@ export class NewUserInfoComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private dialog: MatDialog,
-    private measurementService: MeasurementService) {
-    this.username = this.route.snapshot.params["username"]
-    this.email = this.route.snapshot.params["email"]
-    this.account_id = this.route.snapshot.params["account_id"]
-    userService.getAllUsers().subscribe(data => {
-      this.allUsers = data
-    })
-  }
+    private measurementService: MeasurementService) { }
 
   ngOnInit(): void {
     this.goalsService.getGoals().subscribe(data => {
@@ -125,29 +120,33 @@ export class NewUserInfoComponent implements OnInit {
     this.newuser.protein_norm = this.finalFormGroup.get("protCtrl").value
     this.newuser.fats_norm = this.finalFormGroup.get("fatsCtrl").value
     this.newuser.carbs_norm = this.finalFormGroup.get("carbsCtrl").value
+    this.newuser.water_norm = 0
 
-    //this.firstmeasurement.height = +this.secondFormGroup.get("heightCtrl").value
-    //this.firstmeasurement.weight = +this.secondFormGroup.get("weightCtrl").value
-    //this.firstmeasurement.date_measurement = new Date(Date.now())
-    //this.firstmeasurement.chest = 0
-    //this.firstmeasurement.waist = 0
-    //this.firstmeasurement.hip = 0
-    //this.firstmeasurement.user_id = 
+    this.firstmeasurement.height = +this.secondFormGroup.get("heightCtrl").value
+    this.firstmeasurement.weight = +this.secondFormGroup.get("weightCtrl").value
+    this.firstmeasurement.date_measurement = new Date(Date.now())
+    this.firstmeasurement.chest = 0
+    this.firstmeasurement.waist = 0
+    this.firstmeasurement.hip = 0    
   }
 
   submit() {
     console.log(this.newuser)
     console.log(this.firstmeasurement)
-    this.userService.registrateUser(this.newuser)
-      .subscribe(data => {
-        //this.measurementService.addMeasurement(this.firstmeasurement).subscribe()
-        this.router.navigate(["/"])
-      })
+    this.userService.registrateUser(this.newuser).subscribe(data => {
+      this.userService.getAllUsers().subscribe(data1 => { 
+        this.allUsers = data1
+        this.currentuser = data1.find(u => u.username === this.username)
+        this.firstmeasurement.user_id = this.currentuser.id
+        this.measurementService.addMeasurement(this.firstmeasurement).subscribe();
+      });
+    });
+    this.router.navigate(["/"]);
     this.dialog.open(this.firstDialog);
   }
 
   count(g: string, h: number, w: number, a: number, c_act: number, goal: number) {
-    if (g == 'F') {
+    if (g === 'F') {
       this.bmr = (447.6 + 9.2 * w + 3.1 * h - 4.3 * a) * c_act
     }
     else {
