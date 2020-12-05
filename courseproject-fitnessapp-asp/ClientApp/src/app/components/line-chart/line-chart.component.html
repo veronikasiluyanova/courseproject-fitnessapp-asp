@@ -1,3 +1,21 @@
 <body>
-    <svg #chart class="chart"></svg>
+  <div>
+    <div class="buttons">
+      <button mat-raised-button color="primary" (click)="change(1)">
+        Вес
+      </button>
+      <button mat-raised-button color="primary" (click)="change(2)">
+        Обхват груди
+      </button>
+      <button mat-raised-button color="primary" (click)="change(3)">
+        Обхват талии
+      </button>
+      <button mat-raised-button color="primary" (click)="change(4)">
+        Обхват бедер
+      </button>
+    </div><br />
+    <div>
+      <canvas id="canvas">{{Linechart}}</canvas>
+    </div>
+  </div>
 </body>

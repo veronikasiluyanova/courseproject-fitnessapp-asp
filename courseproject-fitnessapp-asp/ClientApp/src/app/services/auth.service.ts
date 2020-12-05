@@ -29,18 +29,21 @@ export class AuthService {
         localStorage.setItem(ACCESS_TOKEN_KEY, token.access_token);
         this.userService.getAllUsers().subscribe(date => {
           localStorage.setItem(ID, date.find(u => u.username === username).id.toString());
+          console.log(localStorage.getItem(ID));
+          this.router.navigate(["/mypage"]);
         });
       })
     )
   }
 
   isAuthenticated(): boolean {
-    let token = localStorage.getItem(ACCESS_TOKEN_KEY)
-    return token && !this.jwtHelper.isTokenExpired(token)
+    let token = localStorage.getItem(ACCESS_TOKEN_KEY);
+    return token && !this.jwtHelper.isTokenExpired(token);
   }
 
   logout(): void {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(ID);
     this.router.navigate([''])
   }
 }

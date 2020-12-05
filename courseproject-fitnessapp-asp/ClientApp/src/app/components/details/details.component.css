@@ -1,0 +1,16 @@
+body {
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.mat-table {
+  width: 100% !important;
+}
+
+button {
+    border: none;
+}

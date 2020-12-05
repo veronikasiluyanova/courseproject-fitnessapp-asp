@@ -1,0 +1,193 @@
+<div class="detailsContainer">
+  <div class="dateInput">
+    <input matInput [matDatepicker]="picker" [(ngModel)]="currentdate" placeholder="Выберите дату" (dateChange)="addEvent($event)"/>
+    <mat-datepicker-toggle matSuffic [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
+  <div class="tables">
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Завтрак</mat-panel-title>
+          </mat-expansion-panel-header>
+          <table mat-table *ngIf="breakfast" [dataSource]="breakfast" class="mat-elevation-z8" style="width: 100%;">
+            <ng-container matColumnDef="food_id">
+              <th mat-header-cell *matHeaderCellDef> Продукт </th>
+              <td mat-cell *matCellDef="let r"> {{r.food_id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="protein">
+              <th mat-header-cell *matHeaderCellDef> Белки (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.protein}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fats">
+              <th mat-header-cell *matHeaderCellDef> Жиры (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.fats}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="carbs">
+              <th mat-header-cell *matHeaderCellDef> Углеводы (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.carbs}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="kcal">
+              <th mat-header-cell *matHeaderCellDef> Ккал </th>
+              <td mat-cell *matCellDef="let r"> {{r.kcal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let r">
+                <button (click)="deleteRecord(r.id, 1)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Обед</mat-panel-title>
+          </mat-expansion-panel-header>
+          <table mat-table *ngIf="lunch" [dataSource]="lunch" class="mat-elevation-z8" style="width: 100%;">
+            <ng-container matColumnDef="food_id">
+              <th mat-header-cell *matHeaderCellDef> Продукт </th>
+              <td mat-cell *matCellDef="let r">  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="protein">
+              <th mat-header-cell *matHeaderCellDef> Белки (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.protein}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fats">
+              <th mat-header-cell *matHeaderCellDef> Жиры (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.fats}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="carbs">
+              <th mat-header-cell *matHeaderCellDef> Углеводы (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.carbs}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="kcal">
+              <th mat-header-cell *matHeaderCellDef> Ккал </th>
+              <td mat-cell *matCellDef="let r"> {{r.kcal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let r">
+                <button (click)="deleteRecord(r.id, 2)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Ужин</mat-panel-title>
+          </mat-expansion-panel-header>
+          <table mat-table *ngIf="dinner" [dataSource]="dinner" class="mat-elevation-z8" style="width: 100%;">
+            <ng-container matColumnDef="food_id">
+              <th mat-header-cell *matHeaderCellDef> Продукт </th>
+              <td mat-cell *matCellDef="let r"> {{r.food_id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="protein">
+              <th mat-header-cell *matHeaderCellDef> Белки (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.protein}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fats">
+              <th mat-header-cell *matHeaderCellDef> Жиры (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.fats}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="carbs">
+              <th mat-header-cell *matHeaderCellDef> Углеводы (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.carbs}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="kcal">
+              <th mat-header-cell *matHeaderCellDef> Ккал </th>
+              <td mat-cell *matCellDef="let r"> {{r.kcal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let r">
+                <button (click)="deleteRecord(r.id, 3)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Перекус</mat-panel-title>
+          </mat-expansion-panel-header>
+          <table mat-table *ngIf="snack" [dataSource]="snack" class="mat-elevation-z8" style="width: 100%;">
+            <ng-container matColumnDef="food_id">
+              <th mat-header-cell *matHeaderCellDef> Продукт </th>
+              <td mat-cell *matCellDef="let r"> {{r.food_id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="protein">
+              <th mat-header-cell *matHeaderCellDef> Белки (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.protein}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fats">
+              <th mat-header-cell *matHeaderCellDef> Жиры (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.fats}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="carbs">
+              <th mat-header-cell *matHeaderCellDef> Углеводы (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.carbs}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="kcal">
+              <th mat-header-cell *matHeaderCellDef> Ккал </th>
+              <td mat-cell *matCellDef="let r"> {{r.kcal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let r">
+                <button (click)="deleteRecord(r.id, 4)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

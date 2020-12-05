@@ -15,6 +15,14 @@ import { FoodDiaryService } from '../../services/fooddiary.service';
 import { Router } from '@angular/router';
 import { WaterDiaryService } from '../../services/waterdiary.service';
 import { WaterDiaryRecord } from '../../models/waterdiaryrecord';
+import { FoodItem } from '../../models/fooditem';
+
+interface Meal {
+  kcal: number;
+  protein: number;
+  fats: number;
+  carbs: number;
+}
 
 @Component({
   selector: 'app-components-mypage',
@@ -26,6 +34,10 @@ export class MyPageComponent implements OnInit {
   username: string;
   start_weight: number; current_weight: number; goal_weight: number;
 
+  current_chest: number; current_waist: number; current_hip: number;
+
+  kcal_norm: number; protein_norm: number; fats_norm: number; carbs_norm: number;
+
   weight: string; height: string; chest: string; waist: string; hip: string;
   date_measurement: Date;
 
@@ -35,20 +47,26 @@ export class MyPageComponent implements OnInit {
   public diaryrecord = new FoodDiaryRecord();
   public path: string;
 
-  public breakfastFood = "";
-  public lunchFood = "";
-  public dinnerFood = "";
-  public snackFood = "";
+  allFood: FoodItem[];
 
-  public totalString = "ИТОГО: ";
+  public breakfastFood = ""; public lunchFood = "";  public dinnerFood = ""; public snackFood = "";
+
+  public breakfast: Meal; public lunch: Meal; public dinner: Meal; public snack: Meal;
+
+  public totalFood = 0;
   allRecords: FoodDiaryRecord[]
-  totalBreakfast: FoodDiaryRecord[];
+  totalBreakfast: any; //FoodDiaryRecord[];
+  totalLunch: any;
+  totalDinner: any;
+  totalSnack: any;
 
   waterNorm: number; waterTotal: number;
   waterId: number;
   waterDiaryRecord: WaterDiaryRecord;
 
   @ViewChild('callAPIDialog', { static: true }) callAPIDialog: TemplateRef<any>
+
+  tmp: number;
 
   constructor(public dialog: MatDialog,
     private userService: UserService,
@@ -58,7 +76,8 @@ export class MyPageComponent implements OnInit {
     private foodDiaryService: FoodDiaryService,
     private foodService: FoodService,
     private waterDiaryService: WaterDiaryService,
-    private router: Router) {  }
+    private router: Router,
+    private datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.userService.getUser(+localStorage.getItem(ID)).subscribe(data => {
@@ -67,21 +86,57 @@ export class MyPageComponent implements OnInit {
       this.username = this.currentuser.username;
       this.start_weight = this.currentuser.start_weight;
       this.goal_weight = this.currentuser.goal_weight;
+
+      this.kcal_norm = this.currentuser.kcal_norm;
+      this.protein_norm = this.currentuser.protein_norm;
+      this.fats_norm = this.currentuser.fats_norm;
+      this.carbs_norm = this.currentuser.carbs_norm;
+
       this.path = (this.currentuser.gender === "F") ? "../../../assets/images/female.jpg" : "../../../assets/images/male.jpg";
 
       this.measurementService.getCurrent(this.currentuser.id).subscribe(data => {
         this.current_weight = data.weight;
+        this.current_chest = data.chest;
+        this.current_waist = data.waist;
+        this.current_hip = data.hip;
 
         this.foodDiaryService.getFoodDiaryRecords().subscribe(data => {
-          this.allRecords = data.filter(r => r.user_id === this.currentuser.id).filter(rr => rr.date_diary === new Date(Date.now()));
+          this.allRecords = data.filter(r => r.user_id === this.currentuser.id)
+            .filter(rr => this.datepipe.transform(rr.date_diary, 'yyyy-MM-dd') === this.datepipe.transform(Date.now(), 'yyyy-MM-dd'));
 
           this.totalBreakfast = this.allRecords.filter(r => r.meal_id === 1);
-          this.totalBreakfast.forEach((i: FoodDiaryRecord) => {
+          this.totalLunch = this.allRecords.filter(r => r.meal_id === 2);
+          this.totalDinner = this.allRecords.filter(r => r.meal_id === 3);
+          this.totalSnack = this.allRecords.filter(r => r.meal_id === 4);
+
+          this.totalBreakfast.forEach(i => {
             this.foodService.getFoodItem(i.food_id).subscribe(data => {
-              this.breakfastFood = this.breakfastFood + data.name + '(' + this.totalBreakfast.find(r => r.food_id === data.id).gramms + ') ';
+              this.breakfastFood = this.breakfastFood + data.name + '(' + this.totalBreakfast.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
             });
+            this.totalFood = this.totalFood + i.kcal;
           });
-        });
+
+          this.totalLunch.forEach(i => {
+            this.foodService.getFoodItem(i.food_id).subscribe(data => {
+              this.lunchFood = this.lunchFood + data.name + '(' + this.totalLunch.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            });
+            this.totalFood = this.totalFood + i.kcal;
+         });
+
+          this.totalDinner.forEach(i => {
+            this.foodService.getFoodItem(i.food_id).subscribe(data => {
+              this.dinnerFood = this.dinnerFood + data.name + '(' + this.totalDinner.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            });
+            this.totalFood = this.totalFood + i.kcal;
+          });
+
+          this.totalSnack.forEach(i => {
+            this.foodService.getFoodItem(i.food_id).subscribe(data => {
+              this.snackFood = this.snackFood + data.name + '(' + this.totalSnack.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            });
+            this.totalFood = this.totalFood + i.kcal;
+          });
+       });
       });
 
       this.waterNorm = this.currentuser.water_norm;
@@ -93,32 +148,19 @@ export class MyPageComponent implements OnInit {
     });    
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(WaterDialogComponent, {
-      width: '50%',
-      data: { water: this.waterNorm }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.waterNorm = result;
-
-      this.currentuser.water_norm = this.waterNorm;
-      this.userService.updateUser(+localStorage.getItem(ID), this.currentuser).subscribe()
-    });
-    
-  }
-
   updateMeasurement() {
     this.dialogService.openDialog().subscribe(data => {
-      this.newmeasurement = data;
-      this.newmeasurement.height = parseFloat(this.newmeasurement.height.toString());
-      this.newmeasurement.weight = parseFloat(this.newmeasurement.weight.toString());
-      this.newmeasurement.chest = parseFloat(this.newmeasurement.chest.toString());
-      this.newmeasurement.waist = parseFloat(this.newmeasurement.waist.toString());
-      this.newmeasurement.hip = parseFloat(this.newmeasurement.hip.toString());
-      this.newmeasurement.date_measurement = new Date(this.newmeasurement.date_measurement);
-      this.newmeasurement.user_id = this.currentuser.id;
-      this.measurementService.addMeasurement(this.newmeasurement).subscribe();
+      if (data) {
+        this.newmeasurement = data;
+        this.newmeasurement.height = parseFloat(this.newmeasurement.height.toString());
+        this.newmeasurement.weight = parseFloat(this.newmeasurement.weight.toString());
+        this.newmeasurement.chest = parseFloat(this.newmeasurement.chest.toString());
+        this.newmeasurement.waist = parseFloat(this.newmeasurement.waist.toString());
+        this.newmeasurement.hip = parseFloat(this.newmeasurement.hip.toString());
+        this.newmeasurement.date_measurement = new Date(this.newmeasurement.date_measurement);
+        this.newmeasurement.user_id = this.currentuser.id;
+        this.measurementService.addMeasurement(this.newmeasurement).subscribe();
+      }
     });    
   } 
 
@@ -151,25 +193,37 @@ export class MyPageComponent implements OnInit {
 
   addMealGeneral(meal_id: number) {
     this.addMealDialogService.openDialog().subscribe(data => {
-      this.diaryrecord.food_id = data.food_id;
-      this.diaryrecord.gramms = +data.gramms;
-      this.diaryrecord.date_diary = new Date(Date.now());
-      this.diaryrecord.meal_id = meal_id;
-      this.diaryrecord.user_id = this.currentuser.id;
-      this.foodDiaryService.createFoodDiaryRecord(this.diaryrecord).subscribe();
-      switch (meal_id) {
-        case 1:
-          this.breakfastFood = this.breakfastFood + data.name + ' (' + data.gramms + 'г) ';
-          break;
-        case 2:
-          this.lunchFood = this.lunchFood + data.name + ' (' + data.gramms + 'г) ';
-          break;
-        case 3:
-          this.dinnerFood = this.dinnerFood + data.name + ' (' + data.gramms + 'г) ';
-          break;
-        case 4:
-          this.snackFood = this.snackFood + data.name + ' (' + data.gramms + 'г) ';
-          break;
+      if (data) {
+        this.tmp = +data.gramms;
+        this.diaryrecord.food_id = data.food_id;
+        this.diaryrecord.gramms = +data.gramms;
+        this.diaryrecord.date_diary = new Date(Date.now());
+        this.diaryrecord.meal_id = meal_id;
+        this.diaryrecord.user_id = this.currentuser.id;
+
+        this.foodService.getFoodItem(data.food_id).subscribe(d => {
+          this.diaryrecord.kcal = d.kcal / 100 * this.tmp;
+          this.diaryrecord.protein = d.protein / 100 * this.tmp;
+          this.diaryrecord.fats = d.fats / 100 * this.tmp;
+          this.diaryrecord.carbs = d.carbs / 100 * this.tmp;
+          this.totalFood = this.totalFood + d.kcal / 100 * this.tmp;
+          this.foodDiaryService.createFoodDiaryRecord(this.diaryrecord).subscribe();
+        });
+
+        switch (meal_id) {
+          case 1:
+            this.breakfastFood = this.breakfastFood + data.name + ' (' + data.gramms + 'г) ';
+            break;
+          case 2:
+            this.lunchFood = this.lunchFood + data.name + ' (' + data.gramms + 'г) ';
+            break;
+          case 3:
+            this.dinnerFood = this.dinnerFood + data.name + ' (' + data.gramms + 'г) ';
+            break;
+          case 4:
+            this.snackFood = this.snackFood + data.name + ' (' + data.gramms + 'г) ';
+            break;
+        }
       }
     });
   }
@@ -191,6 +245,21 @@ export class MyPageComponent implements OnInit {
   }
 
   openMore() {
+    this.router.navigate(['details']);
+  }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(WaterDialogComponent, {
+      width: '50%',
+      data: { water: this.waterNorm }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.waterNorm = result;
+        this.currentuser.water_norm = this.waterNorm;
+        this.userService.updateUser(+localStorage.getItem(ID), this.currentuser).subscribe()
+      }
+    });
   }
 }

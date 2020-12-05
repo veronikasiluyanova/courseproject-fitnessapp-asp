@@ -5,6 +5,10 @@ export class FoodDiaryRecord {
     public food_id?: number,
     public gramms?: number,
     public meal_id?: number,
-    public user_id?: number
+    public user_id?: number,
+    public kcal?: number,
+    public protein?: number,
+    public fats?: number,
+    public carbs?: number,
   ) { }
 }

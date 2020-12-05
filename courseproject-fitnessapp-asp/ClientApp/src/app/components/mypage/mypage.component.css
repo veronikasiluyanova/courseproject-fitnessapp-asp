@@ -10,6 +10,13 @@ h4 {
   width: auto;
 }
 
+.norms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
 .pagecontainer {
   display: flex;
   flex-direction: row;
@@ -46,11 +53,18 @@ h4 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  height: fit-content;
+  margin-top: 15%;
 }
 
 .paramsCard {
   width: 35vw;
   height: 40%;
+}
+.params {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .diarywatercontainer {

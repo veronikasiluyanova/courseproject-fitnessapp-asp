@@ -12,5 +12,9 @@ namespace courseproject_fitnessapp_asp.Data.Models
         public int meal_id { get; set; }
         public DateTime date_diary { get; set; }
         public int user_id { get; set; }
+        public float kcal { get; set; }
+        public float protein { get; set; }
+        public float fats { get; set; }
+        public float carbs { get; set; }
     }
 }

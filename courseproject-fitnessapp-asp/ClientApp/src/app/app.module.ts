@@ -15,9 +15,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { NewUserInfoComponent } from './components/new-user-info/new-user-info.component';
 import { MeasurementDialogComponent } from './components/measurement-dialog/measurement-dialog.component';
-import { DetailsDialogComponent } from './components/details-dialog/details-dialog.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { AddMealDialogComponent } from './components/add-meal-dialog/add-meal-dialog.component';
+import { DetailsComponent } from './components/details/details.component';
 
 import { FoodService } from './services/food.service';
 import { FoodTypeService } from './services/foodtype.service';
@@ -30,6 +30,7 @@ import { FoodDiaryService } from './services/fooddiary.service';
 import { AddMealDialogService } from './services/add-meal-dialog.service';
 import { MeasurementDialogService } from './services/measurement-dialog.service';
 import { AccountService } from './services/account.service';
+import { WaterDiaryService } from './services/waterdiary.service';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -46,12 +47,11 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatSortModule, MatPaginatorModule } from '@angular/material';
+import { MatSortModule, MatPaginatorModule, MatDatepickerModule, MatExpansionModule, MatNativeDateModule } from '@angular/material';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
-import { WaterDiaryService } from './services/waterdiary.service';
 
 
 export function tokenGetter() {
@@ -72,7 +72,7 @@ export function tokenGetter() {
     NewUserInfoComponent,
     MeasurementDialogComponent,
     AddMealDialogComponent,
-    DetailsDialogComponent,
+    DetailsComponent,
     LineChartComponent
   ],
   imports: [
@@ -86,11 +86,12 @@ export function tokenGetter() {
       { path: 'mypage', component: MyPageComponent, canActivate: [AuthGuard] },
       { path: 'registration', component: RegistrationComponent },
       { path: 'user-start-info/:username/:email/:account_id', component: NewUserInfoComponent },
-      { path: 'line-chart', component: LineChartComponent }
+      { path: 'line-chart', component: LineChartComponent, canActivate: [AuthGuard] },
+      { path: 'details', component: DetailsComponent, canActivate: [AuthGuard] }
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
     MatIconModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatStepperModule, MatSortModule,
-    MatPaginatorModule,
+    MatPaginatorModule, MatDatepickerModule, MatExpansionModule, MatNativeDateModule,
 
     JwtModule.forRoot({
       config: {
@@ -117,6 +118,6 @@ export function tokenGetter() {
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [WaterDialogComponent, MeasurementDialogComponent, AddMealDialogComponent, DetailsDialogComponent]
+  entryComponents: [WaterDialogComponent, MeasurementDialogComponent, AddMealDialogComponent]
 })
 export class AppModule { }

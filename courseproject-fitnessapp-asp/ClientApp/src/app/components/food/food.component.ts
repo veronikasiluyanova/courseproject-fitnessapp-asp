@@ -25,8 +25,6 @@ export class FoodComponent implements OnInit {
     })
     this.foodtypeService.getFoodTypes().subscribe(data => {
       this.foodTypes = data;
-    })
-    
+    })    
   }
-
 }

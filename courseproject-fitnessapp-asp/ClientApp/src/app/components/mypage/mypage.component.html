@@ -1,5 +1,4 @@
 <div class="pagecontainer" *ngIf="username && start_weight && goal_weight ">
-  <!--&& current_weight-->
   <div class="infocontainer">
     <mat-card class="infoCard">
       <div class="mainInfo">
@@ -8,27 +7,39 @@
             {{username}}
           </h4>
           <img src={{path}} />
+          <p class="norms">
+            <mat-label>Ккал: {{kcal_norm}}</mat-label>
+            <mat-label>Белки: {{protein_norm}}г</mat-label>
+            <mat-label>Жиры: {{fats_norm}}г</mat-label>
+            <mat-label>Углеводы: {{carbs_norm}}г</mat-label>
+          </p>
         </div>
         <div class="weightInfo">
           <p>
             <mat-label>Начальный вес</mat-label> <br />
-            {{start_weight}}
+            {{start_weight}}кг
           </p>
           <p>
             <mat-label>Текущий вес</mat-label> <br />
-            {{current_weight}}
+            {{current_weight}}кг
           </p>
           <p>
             <mat-label>Целевой вес</mat-label> <br />
-            {{goal_weight}}
+            {{goal_weight}}кг
           </p>
         </div>
       </div>
     </mat-card>
     <mat-card class="paramsCard">
+      <h5>Текущие параметры</h5>
+      <p class="params">
+        <mat-label>Обхват груди: {{current_chest}}см</mat-label>
+        <mat-label>Обхват талии: {{current_waist}}см</mat-label>
+        <mat-label>Обхват бедер: {{current_hip}}см</mat-label>
+      </p>
       <button mat-raised-button color="primary" (click)="updateMeasurement()">
         Обновить параметры
-      </button>
+      </button><br /><br />
       <button mat-raised-button color="primary" (click)="showProgress()">
         Прогресс
       </button>
@@ -87,7 +98,7 @@
         </div>
       </div>
       <mat-card-footer class="diaryFooter">
-        <span>{{totalString}}</span>
+        <span>ИТОГО: {{totalFood}} ккал</span>
         <button mat-raised-button color="primary" id="moreBtn" (click)="openMore()">Подробнее</button>
       </mat-card-footer>
     </mat-card>
@@ -97,7 +108,7 @@
       <div class="waterCardContent">
         <div>
           <div *ngIf="waterNorm !== 0">
-            <span>{{waterTotal}}</span>/<span>{{waterNorm}}</span>
+            <span>{{waterTotal}}</span>/<span>{{waterNorm}} мл</span>
           </div>
 
           <div class="incdecBtns">

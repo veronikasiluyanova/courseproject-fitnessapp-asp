@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp.Data.Models;
+using System;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
@@ -21,7 +22,7 @@ namespace courseproject_fitnessapp_asp.Controllers
         [HttpGet, Route("GetTodayWater/{id}")]
         public ActionResult<WaterDiaryRecord> GetTodayWater(int id)
         {
-            return _context.waterdiary.ToList().Where(i => i.user_id == id).OrderByDescending(j => j.date_water).FirstOrDefault();
+            return _context.waterdiary.ToList().Where(i => i.user_id == id).Where(i => i.date_water == DateTime.Now.Date).FirstOrDefault();
         }
 
         // GET: api/WaterDiaryRecords

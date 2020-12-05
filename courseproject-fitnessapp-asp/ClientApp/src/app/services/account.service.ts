@@ -14,6 +14,6 @@ export class AccountService {
   }
 
   getAccount(id: number) {
-    return this.http.get(this.url + '/' + id);
+    return this.http.get<Account>(this.url + '/' + id);
   }
 }
