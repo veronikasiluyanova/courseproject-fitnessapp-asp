@@ -3,20 +3,20 @@
 </h2>
 
 <div>
-  <button mat-raised-button color="primary" *ngIf="isAdmin" [routerLink]="['/add-food-item']">Добавить продукт</button>
+  <button mat-raised-button color="primary" [routerLink]="['/add-food-item']">Добавить продукт</button>
 </div>
 
 <div>
-  <p *ngIf="!allFood">
+  <p *ngIf="!dataSource">
     <b>Загрузка...</b>
   </p>
 </div>
 
 <div>
-  <table mat-table *ngIf="allFood && foodTypes" [dataSource]="allFood" class="mat-elevation-z8">
+  <table mat-table matSort [hidden]="!(dataSource && foodTypes)" [dataSource]="dataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Продукт (100г) </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Продукт (100г) </th>
       <td mat-cell *matCellDef="let f"> {{f.name}} </td>
     </ng-container>
 
@@ -49,4 +49,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
   </table>
+  <mat-paginator [pageSizeOptions]="[10, 15]" showFirstLastButtons></mat-paginator>
 </div>

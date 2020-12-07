@@ -18,23 +18,11 @@ export class NavMenuComponent {
     private accService: AccountService,
     private userService: UserService,
     private router: Router) {
-    
   }
 
-  //public get isAdmin(): boolean {
-  //  let isAdmin = false;
-  //  let role;
-  //  this.userService.getUser(this.user_id).subscribe(data => {
-  //    this.username = data.username;
-  //    this.accService.getAllAccounts().subscribe(accs => {
-  //      role = accs.find(a => a.username === this.username).role;
-  //      if (role === 1) {
-  //        isAdmin = true;
-  //      }
-  //    });
-  //  });
-  //  return isAdmin;
-  //}
+  public get isLoggedIn_2(): boolean {
+    return this.authService.isAuthenticated() && +localStorage.getItem(ID) === 11
+  }
 
   public get isLoggedIn(): boolean {
     return this.authService.isAuthenticated()

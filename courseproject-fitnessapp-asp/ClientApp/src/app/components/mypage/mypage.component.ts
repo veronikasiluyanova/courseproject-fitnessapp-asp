@@ -94,14 +94,14 @@ export class MyPageComponent implements OnInit {
 
       this.path = (this.currentuser.gender === "F") ? "../../../assets/images/female.jpg" : "../../../assets/images/male.jpg";
 
-      this.measurementService.getCurrent(this.currentuser.id).subscribe(data => {
-        this.current_weight = data.weight;
-        this.current_chest = data.chest;
-        this.current_waist = data.waist;
-        this.current_hip = data.hip;
+      this.measurementService.getCurrent(this.currentuser.id).subscribe(m => {
+        this.current_weight = m.weight;
+        this.current_chest = m.chest;
+        this.current_waist = m.waist;
+        this.current_hip = m.hip;
 
-        this.foodDiaryService.getFoodDiaryRecords().subscribe(data => {
-          this.allRecords = data.filter(r => r.user_id === this.currentuser.id)
+        this.foodDiaryService.getFoodDiaryRecords().subscribe(f => {
+          this.allRecords = f.filter(r => r.user_id === this.currentuser.id)
             .filter(rr => this.datepipe.transform(rr.date_diary, 'yyyy-MM-dd') === this.datepipe.transform(Date.now(), 'yyyy-MM-dd'));
 
           this.totalBreakfast = this.allRecords.filter(r => r.meal_id === 1);
@@ -110,29 +110,29 @@ export class MyPageComponent implements OnInit {
           this.totalSnack = this.allRecords.filter(r => r.meal_id === 4);
 
           this.totalBreakfast.forEach(i => {
-            this.foodService.getFoodItem(i.food_id).subscribe(data => {
-              this.breakfastFood = this.breakfastFood + data.name + '(' + this.totalBreakfast.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            this.foodService.getFoodItem(i.food_id).subscribe(fi => {
+              this.breakfastFood = this.breakfastFood + fi.name + '(' + this.totalBreakfast.find(r => r.food_id === fi.id).gramms.toString() + 'г) ';
             });
             this.totalFood = this.totalFood + i.kcal;
           });
 
           this.totalLunch.forEach(i => {
-            this.foodService.getFoodItem(i.food_id).subscribe(data => {
-              this.lunchFood = this.lunchFood + data.name + '(' + this.totalLunch.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            this.foodService.getFoodItem(i.food_id).subscribe(fi => {
+              this.lunchFood = this.lunchFood + fi.name + '(' + this.totalLunch.find(r => r.food_id === fi.id).gramms.toString() + 'г) ';
             });
             this.totalFood = this.totalFood + i.kcal;
          });
 
           this.totalDinner.forEach(i => {
-            this.foodService.getFoodItem(i.food_id).subscribe(data => {
-              this.dinnerFood = this.dinnerFood + data.name + '(' + this.totalDinner.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            this.foodService.getFoodItem(i.food_id).subscribe(fi => {
+              this.dinnerFood = this.dinnerFood + fi.name + '(' + this.totalDinner.find(r => r.food_id === fi.id).gramms.toString() + 'г) ';
             });
             this.totalFood = this.totalFood + i.kcal;
           });
 
           this.totalSnack.forEach(i => {
-            this.foodService.getFoodItem(i.food_id).subscribe(data => {
-              this.snackFood = this.snackFood + data.name + '(' + this.totalSnack.find(r => r.food_id === data.id).gramms.toString() + 'г) ';
+            this.foodService.getFoodItem(i.food_id).subscribe(fi => {
+              this.snackFood = this.snackFood + fi.name + '(' + this.totalSnack.find(r => r.food_id === fi.id).gramms.toString() + 'г) ';
             });
             this.totalFood = this.totalFood + i.kcal;
           });
@@ -140,10 +140,10 @@ export class MyPageComponent implements OnInit {
       });
 
       this.waterNorm = this.currentuser.water_norm;
-      this.waterDiaryService.getTodayWater(+localStorage.getItem(ID)).subscribe(data => {
-        this.waterId = data ? data.id : -1;
-        this.waterTotal = data ? data.ml : 0;
-        this.waterDiaryRecord = data ? data : new WaterDiaryRecord();
+      this.waterDiaryService.getTodayWater(+localStorage.getItem(ID)).subscribe(w => {
+        this.waterId = w ? w.id : -1;
+        this.waterTotal = w ? w.ml : 0;
+        this.waterDiaryRecord = w ? w : new WaterDiaryRecord();
       });
     });    
   }
@@ -157,7 +157,7 @@ export class MyPageComponent implements OnInit {
         this.newmeasurement.chest = parseFloat(this.newmeasurement.chest.toString());
         this.newmeasurement.waist = parseFloat(this.newmeasurement.waist.toString());
         this.newmeasurement.hip = parseFloat(this.newmeasurement.hip.toString());
-        this.newmeasurement.date_measurement = new Date(this.newmeasurement.date_measurement);
+       // this.newmeasurement.date_measurement = this.newmeasurement.date_measurement;
         this.newmeasurement.user_id = this.currentuser.id;
         this.measurementService.addMeasurement(this.newmeasurement).subscribe();
       }

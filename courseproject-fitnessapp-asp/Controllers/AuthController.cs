@@ -18,16 +18,10 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
     {
         private readonly IOptions<AuthOptions> authOptions;
         private readonly ApplicationContext _context;
-        //private List<Account> accounts = new List<Account>();
-        //private NpgsqlConnection conn;
         public AuthController(IOptions<AuthOptions> authOptions, ApplicationContext context)
         {
             this.authOptions = authOptions;
             this._context = context;
-            //conn = new NpgsqlConnection("Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;");
-            //conn.Open();
-            //QueryUsers(conn);
-            //conn.Close();
         }
 
         [HttpPost, Route("Login")]
@@ -65,10 +59,7 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, user.id.ToString())
             };
 
-             //foreach(var r in user.role)
-           // {
-                claims.Add(new Claim("role", user.role.ToString()));//r
-           // }
+            claims.Add(new Claim("role", user.role.ToString()));
 
             var token = new JwtSecurityToken(authParams.Issuer,
                 authParams.Audience,
@@ -79,37 +70,5 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        //private void QueryUsers(NpgsqlConnection conn)
-        //{
-        //    string sql = "select id, username, password, role from accounts";
-
-        //    NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
-
-        //    using (NpgsqlDataReader reader = cmd.ExecuteReader())
-        //    {
-        //        if (reader.HasRows)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                Role r = Role.User;
-        //                //Role[] r = new Role[] { Role.User };
-
-        //                if (reader.GetInt32("role") == 1)
-        //                    r = Role.Admin;
-        //                //r = new Role[] { Role.Admin };
-
-        //                _context.accounts.Add(
-        //                new Account
-        //                {
-        //                    id = reader.GetGuid("id"),//= Guid.Parse("e2371dc9-a849-4f3c-9004-df8fc921c13a"),
-        //                    username = reader.GetString("username"),//"user@email.com",
-        //                    password = reader.GetString("password"),
-        //                    role = r
-        //                });
-
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

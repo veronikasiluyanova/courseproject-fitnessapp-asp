@@ -1,11 +1,10 @@
 <div class="detailsContainer">
   <div class="dateInput">
-    <input matInput [matDatepicker]="picker" [(ngModel)]="currentdate" placeholder="Выберите дату" (dateChange)="addEvent($event)"/>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="currentdate" placeholder="Выберите дату" (dateChange)="addEvent($event)" />
     <mat-datepicker-toggle matSuffic [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </div>
   <div class="tables">
-    <div>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -14,7 +13,12 @@
           <table mat-table *ngIf="breakfast" [dataSource]="breakfast" class="mat-elevation-z8" style="width: 100%;">
             <ng-container matColumnDef="food_id">
               <th mat-header-cell *matHeaderCellDef> Продукт </th>
-              <td mat-cell *matCellDef="let r"> {{r.food_id}} </td>
+              <td mat-cell *matCellDef="let r"> {{foodmap.get(r.food_id)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gramms">
+              <th mat-header-cell *matHeaderCellDef> Количество (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.gramms}} </td>
             </ng-container>
 
             <ng-container matColumnDef="protein">
@@ -49,10 +53,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <div>
-      <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>Обед</mat-panel-title>
@@ -60,7 +60,12 @@
           <table mat-table *ngIf="lunch" [dataSource]="lunch" class="mat-elevation-z8" style="width: 100%;">
             <ng-container matColumnDef="food_id">
               <th mat-header-cell *matHeaderCellDef> Продукт </th>
-              <td mat-cell *matCellDef="let r">  </td>
+              <td mat-cell *matCellDef="let r">{{foodmap.get(r.food_id)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gramms">
+              <th mat-header-cell *matHeaderCellDef> Количество (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.gramms}} </td>
             </ng-container>
 
             <ng-container matColumnDef="protein">
@@ -95,10 +100,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <div>
-      <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>Ужин</mat-panel-title>
@@ -106,7 +107,12 @@
           <table mat-table *ngIf="dinner" [dataSource]="dinner" class="mat-elevation-z8" style="width: 100%;">
             <ng-container matColumnDef="food_id">
               <th mat-header-cell *matHeaderCellDef> Продукт </th>
-              <td mat-cell *matCellDef="let r"> {{r.food_id}} </td>
+              <td mat-cell *matCellDef="let r"> {{foodmap.get(r.food_id)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gramms">
+              <th mat-header-cell *matHeaderCellDef> Количество (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.gramms}} </td>
             </ng-container>
 
             <ng-container matColumnDef="protein">
@@ -141,10 +147,6 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <div>
-      <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>Перекус</mat-panel-title>
@@ -152,7 +154,12 @@
           <table mat-table *ngIf="snack" [dataSource]="snack" class="mat-elevation-z8" style="width: 100%;">
             <ng-container matColumnDef="food_id">
               <th mat-header-cell *matHeaderCellDef> Продукт </th>
-              <td mat-cell *matCellDef="let r"> {{r.food_id}} </td>
+              <td mat-cell *matCellDef="let r"> {{foodmap.get(r.food_id)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="gramms">
+              <th mat-header-cell *matHeaderCellDef> Количество (г) </th>
+              <td mat-cell *matCellDef="let r"> {{r.gramms}} </td>
             </ng-container>
 
             <ng-container matColumnDef="protein">
@@ -188,6 +195,5 @@
           </table>
         </mat-expansion-panel>
       </mat-accordion>
-    </div>
   </div>
 </div>

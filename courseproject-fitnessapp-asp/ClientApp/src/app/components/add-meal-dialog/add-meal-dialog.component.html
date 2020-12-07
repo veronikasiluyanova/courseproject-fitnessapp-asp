@@ -4,7 +4,7 @@
     <mat-label>Продукт</mat-label>
     <input matInput placeholder="Поиск" (keyup)="search($event.target.value)" [value]="[data.name]"/>
   </mat-form-field><br />
-  <mat-table matSort *ngIf="allFood && foodTypes" [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table matSort [hidden]="!(dataSource && typesmap)" [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
 
     <ng-container matColumnDef="name">
       <th mat-header-cell mat-sort-header *matHeaderCellDef> Продукт (100г) </th>
@@ -12,8 +12,8 @@
     </ng-container>
 
     <ng-container matColumnDef="food_type_id">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef> Тип </th>
-      <td  mat-cell *matCellDef="let f"> {{foodTypes[f.food_type_id-1].food_type}} </td>
+      <th mat-header-cell *matHeaderCellDef> Тип </th>
+      <td  mat-cell *matCellDef="let f">{{typesmap.get(f.food_type_id)}}</td>
     </ng-container>
 
     <ng-container matColumnDef="protein">
@@ -36,10 +36,10 @@
       <td mat-cell  *matCellDef="let f"> {{f.kcal}} </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"></tr>
 
-  </mat-table>
+  </table>
   <mat-paginator [pageSizeOptions]="[5, 7]" showFirstLastButtons ></mat-paginator>
   <mat-form-field>
     <mat-label>Количество (г)</mat-label>
@@ -47,7 +47,7 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
     Сохранить
   </button>
   <button mat-button mat-dialog-close>Отмена</button>

@@ -17,11 +17,11 @@ export class DetailsComponent implements OnInit {
 
   public currentdate: Date;
   user_id: number;
-
-  public allFood: FoodItem[];
   public allRecords: FoodDiaryRecord[];
   public breakfast: FoodDiaryRecord[]; public lunch: FoodDiaryRecord[]; public dinner: FoodDiaryRecord[]; public snack: FoodDiaryRecord[];
-  displayedColumns: string[] = ['food_id', 'kcal', 'protein', 'fats', 'carbs', 'action'];
+  displayedColumns: string[] = ['food_id', 'gramms', 'kcal', 'protein', 'fats', 'carbs', 'action'];
+
+  foodmap = new Map();
 
   constructor(
     private foodDiaryService: FoodDiaryService,
@@ -31,7 +31,9 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.user_id = +localStorage.getItem(ID);
     this.foodService.getFoodItems().subscribe(data => {
-      this.allFood = data;
+      data.forEach(f => {
+        this.foodmap.set(f.id, f.name);
+      });
     });
   }
 
@@ -66,13 +68,5 @@ export class DetailsComponent implements OnInit {
       }
       this.foodDiaryService.deleteFoodDiaryRecord(id).subscribe();
     }
-  }
-
-  public getFoodName(id: number): string {
-    let name: string;
-    this.foodService.getFoodItem(id).subscribe(data => {
-      name = data.name;
-    });
-    return name;
   }
 }

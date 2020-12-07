@@ -1,5 +1,5 @@
 <div mat-dialog-content>
-  <p>Обновление параметров.</p>
+  <p>Обновление параметров</p>
   <mat-form-field>
     <mat-label>Дата</mat-label>
     <input matInput type="date" [(ngModel)]="data.date_measurement">
@@ -26,7 +26,7 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>
     Установить
   </button>
   <button mat-button mat-dialog-close>Отмена</button>

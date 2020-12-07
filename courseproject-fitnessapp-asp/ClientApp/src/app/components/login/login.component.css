@@ -1,9 +1,11 @@
 body {
   /*background-image: url("~/assets/images/2.jpg");
   background-size: cover;*/
-  height: fit-content;
-  width: fit-content;
+  height: 100%;
+  width: 100%;
   margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 /*#main {

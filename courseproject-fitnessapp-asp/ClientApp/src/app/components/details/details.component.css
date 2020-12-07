@@ -7,10 +7,9 @@ body {
   justify-content: space-around;
 }
 
-.mat-table {
-  width: 100% !important;
-}
-
 button {
-    border: none;
+  border: none;
+}
+input {
+  width: auto;
 }

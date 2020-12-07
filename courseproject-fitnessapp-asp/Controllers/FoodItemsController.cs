@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp.Data;
-using System;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
@@ -19,14 +18,12 @@ namespace courseproject_fitnessapp_asp.Controllers
             _context = context;
         }
 
-        // GET: api/FoodItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodSet()
         {
             return await _context.food.ToListAsync();
         }
 
-        // GET: api/FoodItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FoodItem>> GetFoodItem(int id)
         {
@@ -40,9 +37,6 @@ namespace courseproject_fitnessapp_asp.Controllers
             return foodItem;
         }
 
-        // PUT: api/FoodItems/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFoodItem(int id, FoodItem foodItem)
         {
@@ -72,9 +66,6 @@ namespace courseproject_fitnessapp_asp.Controllers
             return NoContent();
         }
 
-        // POST: api/FoodItems
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<FoodItem>> AddFoodItem([FromBody]FoodItem foodItem)
         {
@@ -84,7 +75,6 @@ namespace courseproject_fitnessapp_asp.Controllers
             return CreatedAtAction("GetFoodItem", new { id = foodItem.id }, foodItem);
         }
 
-        // DELETE: api/FoodItems/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<FoodItem>> DeleteFoodItem(int id)
         {
