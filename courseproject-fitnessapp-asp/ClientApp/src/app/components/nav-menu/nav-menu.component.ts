@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService, ID } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { AccountService } from '../../services/account.service';
-import { UserService } from '../../services/user.service';
+import { MatDialog } from '@angular/material';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { FileUploadDialogComponent } from '../file-upload-dialog/file-upload-dialog.component';
 
 @Component({
   selector: 'app-nav-menu',
@@ -15,22 +16,21 @@ export class NavMenuComponent {
   username: string;
 
   constructor(private authService: AuthService,
-    private accService: AccountService,
-    private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    public dialog: MatDialog) {
   }
 
   public get isLoggedIn_2(): boolean {
-    return this.authService.isAuthenticated() && +localStorage.getItem(ID) === 11
+    return this.authService.isAuthenticated() && +localStorage.getItem(ID) === 11;
   }
 
   public get isLoggedIn(): boolean {
-    return this.authService.isAuthenticated()
+    return this.authService.isAuthenticated();
   }
 
   logout() {
-    this.authService.logout()
-    this.router.navigate(['/'])
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   collapse() {
@@ -39,5 +39,21 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '50%'
+    });
+    
+    dialogRef.afterClosed().subscribe();
+  }
+
+  openUploadDialog() {
+    const dialogRef = this.dialog.open(FileUploadDialogComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe();
   }
 }

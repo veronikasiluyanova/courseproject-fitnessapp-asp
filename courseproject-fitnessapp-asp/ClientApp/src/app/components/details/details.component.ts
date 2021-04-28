@@ -5,7 +5,6 @@ import { ID } from "../../services/auth.service";
 import { MatDatepickerInputEvent } from "@angular/material";
 import { DatePipe } from "@angular/common";
 import { FoodService } from "../../services/food.service";
-import { FoodItem } from "../../models/fooditem";
 
 @Component({
   selector: 'details',

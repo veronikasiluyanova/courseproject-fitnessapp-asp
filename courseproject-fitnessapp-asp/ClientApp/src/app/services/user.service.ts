@@ -20,7 +20,7 @@ export class UserService {
   getUser(id: number) {
     return this.http.get<User>(this.url + '/' + id);
   }
-
+  
   updateUser(id: number, user: User) {
     return this.http.put(this.url + '/' + id, user);
   }

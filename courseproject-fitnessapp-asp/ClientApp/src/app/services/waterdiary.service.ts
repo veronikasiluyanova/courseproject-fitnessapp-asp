@@ -32,4 +32,8 @@ export class WaterDiaryService {
   deleteWaterDiaryRecord(id: number) {
     return this.http.delete(this.url + '/' + id);
   }
+
+  deleteWaterDiaryByUser(user_id: number) {
+    return this.http.delete<WaterDiaryRecord>(this.url + '/DeleteWaterDiaryByUser/' + user_id)
+  }
 }

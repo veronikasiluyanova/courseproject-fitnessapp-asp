@@ -28,4 +28,8 @@ export class FoodDiaryService {
   deleteFoodDiaryRecord(id: number) {
     return this.http.delete(this.url + '/' + id);
   }
+
+  deleteDiaryByUser(user_id: number) {
+    return this.http.delete<FoodDiaryRecord>(this.url + '/DeleteDiaryByUser/' + user_id)
+  }
 }

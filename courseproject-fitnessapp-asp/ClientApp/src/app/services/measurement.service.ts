@@ -24,4 +24,8 @@ export class MeasurementService {
   getCurrent(user_id: number) {
     return this.http.get<Measurement>(this.url + '/GetCurrentMeasurement/' + user_id)
   }
+
+  deleteMeasurementByUser(user_id: number) {
+    return this.http.delete<Measurement>(this.url + '/DeleteMeasurementByUser/' + user_id)
+  }
 }

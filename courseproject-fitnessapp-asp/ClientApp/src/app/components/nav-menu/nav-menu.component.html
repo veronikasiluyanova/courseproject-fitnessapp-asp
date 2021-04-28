@@ -15,21 +15,22 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li class="nav-item"
-              [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/mypage']" *ngIf="isLoggedIn">Моя страница</a>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+        [ngClass]="{ show: isExpanded }" >
+        <ul class="navbar-nav flex-grow" *ngIf="isLoggedIn">
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <button mat-button color="primary" [routerLink]="['/mypage']">Моя страница</button>
           </li>
-          <li class="nav-item"
-              [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/food-info']" *ngIf="isLoggedIn_2">Продукты</a>
-          </li>
-          <li class="nav-item">
-            <button mat-raised-button *ngIf="isLoggedIn" (click)="logout()">Выйти</button>
+          <li>
+            <button mat-button color="primary" [matMenuTriggerFor]="menu">Настройки</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLinkActive]="['link-active']" *ngIf="isLoggedIn_2">
+                <a class="nav-link text-dark" [routerLink]="['/food-info']">Продукты</a>
+              </button>
+              <button mat-menu-item (click)="openUploadDialog()">Изменить фото</button>
+              <button mat-menu-item (click)="openDialog()">Удалить аккаунт</button>
+              <button mat-menu-item (click)="logout()">Выйти</button>
+            </mat-menu>
           </li>
         </ul>
       </div>

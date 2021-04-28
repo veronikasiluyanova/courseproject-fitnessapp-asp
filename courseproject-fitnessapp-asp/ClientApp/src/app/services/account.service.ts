@@ -16,4 +16,8 @@ export class AccountService {
   getAccount(id: number) {
     return this.http.get<Account>(this.url + '/' + id);
   }
+  
+  deleteAccount(id: number) {
+    return this.http.delete<Account>(this.url + '/' + id)
+  }
 }

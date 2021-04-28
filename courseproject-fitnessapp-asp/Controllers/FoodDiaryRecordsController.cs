@@ -109,6 +109,19 @@ namespace courseproject_fitnessapp_asp.Controllers
             return foodDiaryRecord;
         }
 
+        [HttpDelete, Route("DeleteDiaryByUser/{user_id}")]
+        public async Task<ActionResult<int>> DeleteDiaryByUser(int user_id)
+        {
+            var tmp = _context.fooddiary.Where(r => r.user_id == user_id);
+            foreach (var r in tmp)
+            {
+                _context.fooddiary.Remove(r);
+            }
+            await _context.SaveChangesAsync();
+            return tmp.Count();
+        }
+
+
         private bool FoodDiaryRecordExists(int id)
         {
             return _context.fooddiary.Any(e => e.id == id);

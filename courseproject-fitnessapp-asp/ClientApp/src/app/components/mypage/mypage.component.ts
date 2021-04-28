@@ -160,6 +160,9 @@ export class MyPageComponent implements OnInit {
        // this.newmeasurement.date_measurement = this.newmeasurement.date_measurement;
         this.newmeasurement.user_id = this.currentuser.id;
         this.measurementService.addMeasurement(this.newmeasurement).subscribe();
+        this.current_chest = parseFloat(this.newmeasurement.chest.toString());
+        this.current_hip = parseFloat(this.newmeasurement.hip.toString());
+        this.current_waist = parseFloat(this.newmeasurement.waist.toString());
       }
     });    
   } 
@@ -191,7 +194,7 @@ export class MyPageComponent implements OnInit {
     }
   }
 
-  addMealGeneral(meal_id: number) {
+  addMeal(meal_id: number) {
     this.addMealDialogService.openDialog().subscribe(data => {
       if (data) {
         this.tmp = +data.gramms;
@@ -228,27 +231,11 @@ export class MyPageComponent implements OnInit {
     });
   }
 
-  addBreakfast() {
-    this.addMealGeneral(1);
- }
-
-  addLunch() {
-    this.addMealGeneral(2);
-  }
-
-  addDinner() {
-    this.addMealGeneral(3);
-  }
-
-  addSnack() {
-    this.addMealGeneral(4);
-  }
-
   openMore() {
     this.router.navigate(['details']);
   }
 
-  openDialog() {
+  openWaterDialog() {
     const dialogRef = this.dialog.open(WaterDialogComponent, {
       width: '50%',
       data: { water: this.waterNorm }
@@ -261,5 +248,9 @@ export class MyPageComponent implements OnInit {
         this.userService.updateUser(+localStorage.getItem(ID), this.currentuser).subscribe()
       }
     });
+  }
+
+  onFileSelected(event) {
+    
   }
 }

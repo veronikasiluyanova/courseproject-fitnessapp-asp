@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "courseproject-fitnessapp-asp", "courseproject-fitnessapp-asp\courseproject-fitnessapp-asp.csproj", "{E8766F5B-C25E-4435-B914-9C5CEDA482DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "courseproject-fitnessapp-asp-common", "courseproject-fitnessapp-asp-common\courseproject-fitnessapp-asp-common.csproj", "{8CE60C56-6241-44F5-A69A-A52FE58E9CAF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "courseproject-fitnessapp-asp-auth", "courseproject-fitnessapp-asp-auth\courseproject-fitnessapp-asp-auth.csproj", "{143ADCC9-CDA2-45CA-818A-E7C2C10C5BC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "courseproject-fitnessapp-asp-common", "courseproject-fitnessapp-asp-common\courseproject-fitnessapp-asp-common.csproj", "{8CE60C56-6241-44F5-A69A-A52FE58E9CAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{8CE60C56-6241-44F5-A69A-A52FE58E9CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CE60C56-6241-44F5-A69A-A52FE58E9CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CE60C56-6241-44F5-A69A-A52FE58E9CAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{143ADCC9-CDA2-45CA-818A-E7C2C10C5BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{143ADCC9-CDA2-45CA-818A-E7C2C10C5BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{143ADCC9-CDA2-45CA-818A-E7C2C10C5BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{143ADCC9-CDA2-45CA-818A-E7C2C10C5BC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

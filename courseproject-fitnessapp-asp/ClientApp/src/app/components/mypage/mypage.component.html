@@ -7,6 +7,7 @@
             {{username}}
           </h4>
           <img src={{path}} />
+          <!-- <input type="file" (change)="onFileSelected($event)"> -->
           <p class="norms">
             <mat-label>Ккал: {{kcal_norm}}</mat-label>
             <mat-label>Белки: {{protein_norm}}г</mat-label>
@@ -53,28 +54,28 @@
         <div class="diaryDataHeaders">
           <div id="breakfastHeader">
             <span>Завтрак</span><br />
-            <button mat-icon-button id="addBtn" (click)="addBreakfast()">
+            <button mat-icon-button id="addBtn" (click)="addMeal(1)">
               <mat-icon>add_circle</mat-icon>
             </button>
           </div>
 
           <div id="lunchHeader">
             <span>Обед</span><br />
-            <button mat-icon-button id="addBtn" (click)="addLunch()">
+            <button mat-icon-button id="addBtn" (click)="addMeal(2)">
               <mat-icon>add_circle</mat-icon>
             </button>
           </div>
 
           <div id="dinnerHeader">
             <span>Ужин</span><br />
-            <button mat-icon-button id="addBtn" (click)="addDinner()">
+            <button mat-icon-button id="addBtn" (click)="addMeal(3)">
               <mat-icon>add_circle</mat-icon>
             </button>
           </div>
 
           <div id="snackHeader">
             <span>Перекус</span><br />
-            <button mat-icon-button id="addBtn" (click)="addSnack()">
+            <button mat-icon-button id="addBtn" (click)="addMeal(4)">
               <mat-icon>add_circle</mat-icon>
             </button>
           </div>
@@ -120,7 +121,7 @@
             </button>
           </div>
         </div>
-        <button mat-raised-button color="primary" (click)="openDialog()">
+        <button mat-raised-button color="primary" (click)="openWaterDialog()">
           Обновить норму
         </button>
       </div>

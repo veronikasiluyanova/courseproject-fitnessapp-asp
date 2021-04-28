@@ -6,7 +6,9 @@ export class Account {
     public id?: string,
     public username?: string,
     public password?: string,
-    public role?: Role
+    public role?: Role,
+    public email?: string,
+    public confirmed?: boolean
   ) { }
 }
 export enum Role {

@@ -48,10 +48,13 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSortModule, MatPaginatorModule, MatDatepickerModule, MatExpansionModule, MatNativeDateModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { FileUploadDialogComponent } from './components/file-upload-dialog/file-upload-dialog.component';
 
 
 export function tokenGetter() {
@@ -73,7 +76,9 @@ export function tokenGetter() {
     MeasurementDialogComponent,
     AddMealDialogComponent,
     DetailsComponent,
-    LineChartComponent
+    LineChartComponent,
+    DeleteDialogComponent,
+    FileUploadDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }), BrowserAnimationsModule,
@@ -91,7 +96,7 @@ export function tokenGetter() {
     ]),
     MatTableModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule,
     MatIconModule, MatDialogModule, MatRadioModule, MatAutocompleteModule, MatStepperModule, MatSortModule,
-    MatPaginatorModule, MatDatepickerModule, MatExpansionModule, MatNativeDateModule,
+    MatPaginatorModule, MatDatepickerModule, MatExpansionModule, MatNativeDateModule, MatMenuModule,
 
     JwtModule.forRoot({
       config: {
@@ -118,6 +123,11 @@ export function tokenGetter() {
 
   ],
   bootstrap: [AppComponent],
-  entryComponents: [WaterDialogComponent, MeasurementDialogComponent, AddMealDialogComponent]
+  entryComponents: [
+    WaterDialogComponent, 
+    MeasurementDialogComponent, 
+    AddMealDialogComponent, 
+    DeleteDialogComponent,
+    FileUploadDialogComponent]
 })
 export class AppModule { }

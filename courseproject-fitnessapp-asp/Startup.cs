@@ -24,7 +24,7 @@ namespace courseproject_fitnessapp_asp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            _connectionString = "Host=127.0.0.1;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;"; //Configuration["DefaultConnection"];
+            _connectionString = "Host=localhost;Port=5432;Database=FitnessApp_DB;User ID=vs;Password=password;"; //Configuration["DefaultConnection"];
 
 
             services.AddRouting();

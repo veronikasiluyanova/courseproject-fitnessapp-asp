@@ -18,6 +18,7 @@ namespace courseproject_fitnessapp_asp_auth.Controllers
     {
         private readonly IOptions<AuthOptions> authOptions;
         private readonly ApplicationContext _context;
+
         public AuthController(IOptions<AuthOptions> authOptions, ApplicationContext context)
         {
             this.authOptions = authOptions;

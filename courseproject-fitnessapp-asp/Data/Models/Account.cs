@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace courseproject_fitnessapp_asp.Data
+﻿namespace courseproject_fitnessapp_asp.Data
 {
     public class Account
     {
@@ -12,6 +7,8 @@ namespace courseproject_fitnessapp_asp.Data
         public string username { get; set; }
         public string password { get; set; }
         public Role role { get; set; }
+        public string email { get; set; }
+        public bool confirmed { get; set; }
     }
 
     public enum Role

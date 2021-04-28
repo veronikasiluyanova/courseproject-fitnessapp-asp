@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp.Data;
+using Microsoft.AspNetCore.Identity;
+using courseproject_fitnessapp_asp_common;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
@@ -13,14 +17,19 @@ namespace courseproject_fitnessapp_asp.Controllers
     {
         private readonly ApplicationContext _context;
 
+        //private readonly UserManager<Account> _userManager;
+        //private readonly SignInManager<Account> _signInManager;
+
         public AccountsController(ApplicationContext context)
         {
             _context = context;
+            //_userManager = userManager;
+            //_signInManager = signInManager;
         }
 
         // GET: api/Accounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> Getaccounts()
+        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
             return await _context.accounts.ToListAsync();
         }
@@ -72,12 +81,28 @@ namespace courseproject_fitnessapp_asp.Controllers
         }
 
         // POST: api/Accounts
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Account>> PostAccount(Account account)
         {
-            _context.accounts.Add(account);
+            //var result = await _userManager.CreateAsync(account, account.password);
+            //EmailService emailService;
+            //if (result.Succeeded)
+            //{
+            //    // генерация токена для пользователя
+            //    var code = await _userManager.GenerateEmailConfirmationTokenAsync(account);
+            //    var callbackUrl = Url.Action(
+            //        "ConfirmEmail",
+            //        "Accounts",
+            //        new { userId = account.Id, code = code },
+            //        protocol: HttpContext.Request.Scheme);
+            //    emailService = new EmailService();
+            //    await emailService.SendEmailAsync(account.email, "Confirm your account",
+            //        $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+
+            //    return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+            //}
+
+             _context.accounts.Add(account);
             try
             {
                 await _context.SaveChangesAsync();
@@ -96,6 +121,26 @@ namespace courseproject_fitnessapp_asp.Controllers
 
             return CreatedAtAction("GetAccount", new { id = account.id }, account);
         }
+
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        //{
+        //    if (userId == null || code == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    if (user == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    var result = await _userManager.ConfirmEmailAsync(user, code);
+        //    if (result.Succeeded)
+        //        return Ok();
+        //    else
+        //        return BadRequest();
+        //}
 
         // DELETE: api/Accounts/5
         [HttpDelete("{id}")]

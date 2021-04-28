@@ -34,7 +34,8 @@ export class RegistrationComponent implements OnInit {
       this.newaccount.role = Role.User
       this.newaccount.id = Guid.create().toString()
       this.regService.registrateAccount(this.newaccount).subscribe()
-      this.router.navigate(["/user-start-info", this.newaccount.username, this.email, this.newaccount.id])
+      //confirm email then navigate
+      this.router.navigate(["/user-start-info", this.newaccount.username, this.newaccount.email, this.newaccount.id])
     }
   }
 }

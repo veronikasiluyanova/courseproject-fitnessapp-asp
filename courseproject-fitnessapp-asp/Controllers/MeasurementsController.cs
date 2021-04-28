@@ -36,7 +36,7 @@ namespace courseproject_fitnessapp_asp.Controllers
         [HttpGet, Route("GetCurrentMeasurement/{id}")]
         public ActionResult<Measurement> GetCurrentMeasurement(int id)
         {
-            return _context.measurement.ToList().Where(i => i.user_id == id).OrderByDescending(j => j.date_measurement).First();
+            return _context.measurement.ToList().Where(i => i.user_id == id).OrderByDescending(j => j.date_measurement).OrderByDescending(k => k.id).First();
         }
 
         // GET: api/Measurements/5
@@ -111,6 +111,18 @@ namespace courseproject_fitnessapp_asp.Controllers
             await _context.SaveChangesAsync();
 
             return measurement;
+        }
+
+        [HttpDelete, Route("DeleteMeasurementByUser/{user_id}")]
+        public async Task<ActionResult<int>> DeleteMeasurementByUser(int user_id)
+        {
+            var tmp = _context.measurement.Where(m => m.user_id == user_id);
+            foreach(var m in tmp)
+            {
+                _context.measurement.Remove(m);
+            }
+            await _context.SaveChangesAsync();
+            return tmp.Count();
         }
 
         private bool MeasurementExists(int id)
