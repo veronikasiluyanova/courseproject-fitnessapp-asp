@@ -18,6 +18,7 @@ export class User {
     public fats_norm?: number, 
     public carbs_norm?: number, 
     public kcal_norm?: number,
-    public water_norm?: number
+    public water_norm?: number,
+    public image?: string
   ) { }
 }

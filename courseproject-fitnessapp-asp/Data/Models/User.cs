@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace courseproject_fitnessapp_asp.Data
@@ -23,5 +22,6 @@ namespace courseproject_fitnessapp_asp.Data
         public float carbs_norm { get; set; }
         public float kcal_norm { get; set; }
         public float water_norm { get; set; }
+        public string image { get; set; }
     }
 }

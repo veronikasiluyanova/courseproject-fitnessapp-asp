@@ -16,6 +16,7 @@ namespace courseproject_fitnessapp_asp
         public DbSet<Measurement> measurement { get; set; }
         public DbSet<FoodDiaryRecord> fooddiary { get; set; }
         public DbSet<WaterDiaryRecord> waterdiary { get; set; }
+        public DbSet<Image> images { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
              : base(options) { }

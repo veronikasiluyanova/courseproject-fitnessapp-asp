@@ -43,14 +43,16 @@ export class MyPageComponent implements OnInit {
 
   public allUsers: User[];
   public currentuser: User;
-  public newmeasurement: Measurement;
-  public diaryrecord = new FoodDiaryRecord();
   public path: string;
+
+  public currentmeasurement: Measurement;
+  public newmeasurement: Measurement;
+
+  public diaryrecord = new FoodDiaryRecord();
 
   allFood: FoodItem[];
 
   public breakfastFood = ""; public lunchFood = "";  public dinnerFood = ""; public snackFood = "";
-
   public breakfast: Meal; public lunch: Meal; public dinner: Meal; public snack: Meal;
 
   public totalFood = 0;
@@ -67,6 +69,9 @@ export class MyPageComponent implements OnInit {
   @ViewChild('callAPIDialog', { static: true }) callAPIDialog: TemplateRef<any>
 
   tmp: number;
+
+  goal_1_3: boolean;
+  goal_2: boolean;
 
   constructor(public dialog: MatDialog,
     private userService: UserService,
@@ -92,9 +97,14 @@ export class MyPageComponent implements OnInit {
       this.fats_norm = this.currentuser.fats_norm;
       this.carbs_norm = this.currentuser.carbs_norm;
 
-      this.path = (this.currentuser.gender === "F") ? "../../../assets/images/female.jpg" : "../../../assets/images/male.jpg";
+      this.currentuser.goal_id === 2 ? this.goal_2 = true : this.goal_1_3 = true;
+
+      this.path = this.currentuser.image ? this.currentuser.image 
+       : ((this.currentuser.gender === "F") ? "../../../assets/images/female_default.jpg" : "../../../assets/images/male_default.jpg");
+      console.log(this.path);
 
       this.measurementService.getCurrent(this.currentuser.id).subscribe(m => {
+        this.currentmeasurement = m;
         this.current_weight = m.weight;
         this.current_chest = m.chest;
         this.current_waist = m.waist;
@@ -149,7 +159,7 @@ export class MyPageComponent implements OnInit {
   }
 
   updateMeasurement() {
-    this.dialogService.openDialog().subscribe(data => {
+    this.dialogService.openDialog(this.currentmeasurement).subscribe(data => {
       if (data) {
         this.newmeasurement = data;
         this.newmeasurement.height = parseFloat(this.newmeasurement.height.toString());

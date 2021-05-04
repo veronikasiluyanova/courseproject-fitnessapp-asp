@@ -1,13 +1,12 @@
 <div class="pagecontainer" *ngIf="username && start_weight && goal_weight ">
   <div class="infocontainer">
     <mat-card class="infoCard">
+      <h4 class="username">
+        {{username}}
+      </h4>
       <div class="mainInfo">
         <div class="profile">
-          <h4 class="username">
-            {{username}}
-          </h4>
           <img src={{path}} />
-          <!-- <input type="file" (change)="onFileSelected($event)"> -->
           <p class="norms">
             <mat-label>Ккал: {{kcal_norm}}</mat-label>
             <mat-label>Белки: {{protein_norm}}г</mat-label>
@@ -15,7 +14,7 @@
             <mat-label>Углеводы: {{carbs_norm}}г</mat-label>
           </p>
         </div>
-        <div class="weightInfo">
+        <div class="weightInfo" *ngIf="goal_1_3">
           <p>
             <mat-label>Начальный вес</mat-label> <br />
             {{start_weight}}кг
@@ -27,6 +26,16 @@
           <p>
             <mat-label>Целевой вес</mat-label> <br />
             {{goal_weight}}кг
+          </p>
+        </div>
+        <div class="weightInfo" *ngIf="goal_2"> 
+          <p>
+            <mat-label>Поддержание веса</mat-label> <br />
+            {{goal_weight}}кг
+          </p>
+          <p>
+            <mat-label>Текущий вес</mat-label> <br />
+            {{current_weight}}кг
           </p>
         </div>
       </div>

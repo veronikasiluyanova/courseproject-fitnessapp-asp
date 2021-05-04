@@ -1,6 +1,7 @@
 <div mat-dialog-content>
-    <div>
-        <input type="file">
-    </div>
+    <input type="file" (change)="onFileSelected($event)" #file>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" [mat-dialog-close]="close" (click)="saveImage(file.files)">Сохранить</button>
     <button mat-stroked-button mat-dialog-close>Отмена</button>
 </div>

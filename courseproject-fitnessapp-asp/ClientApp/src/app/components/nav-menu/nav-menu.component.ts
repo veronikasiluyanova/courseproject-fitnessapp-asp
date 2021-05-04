@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from '../file-upload-dialog/file-upload-dialog.component';
+import { ResourceLoader } from '@angular/compiler';
 
 @Component({
   selector: 'app-nav-menu',
@@ -51,7 +52,8 @@ export class NavMenuComponent {
 
   openUploadDialog() {
     const dialogRef = this.dialog.open(FileUploadDialogComponent, {
-      width: '50%'
+      width: '50%',
+      data: {path: ''}
     });
 
     dialogRef.afterClosed().subscribe();

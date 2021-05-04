@@ -1,6 +1,3 @@
-body {
-}
-
 h4 {
   width: 100%;
   text-align: center;
@@ -12,6 +9,13 @@ h4 {
 
 .username{
   width: auto;
+}
+
+img {
+  min-width: 150px;
+  min-height: auto;
+  max-width: 40%;
+  max-height: auto;
 }
 
 .norms {
@@ -26,6 +30,7 @@ h4 {
   flex-direction: row;
   justify-content: space-around;
   height: 90vh;
+  width: 100%;
 }
 
 .infocontainer {
@@ -37,6 +42,7 @@ h4 {
 
 .infoCard {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
   width: 35vw;
@@ -48,10 +54,13 @@ h4 {
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
+  align-self: center;
+  width: 80%;
 }
 .profile {
   display: flex;
   flex-direction: column;
+  width: 60%;
 }
 .weightInfo {
   display: flex;

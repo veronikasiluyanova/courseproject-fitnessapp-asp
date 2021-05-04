@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using courseproject_fitnessapp_asp;
 using courseproject_fitnessapp_asp.Data;
+using System.IO;
 
 namespace courseproject_fitnessapp_asp.Controllers
 {
@@ -106,5 +107,30 @@ namespace courseproject_fitnessapp_asp.Controllers
         {
             return _context.users.Any(e => e.id == id);
         }
+
+        //[HttpPut("{id}")]
+        //public async Task<string> UploadProfileImage([FromForm(Name = "uploadedFile")] IFormFile file)
+        //{
+        //    if (file == null || file.Length == 0)
+        //        throw new Exception("Please select profile picture");
+
+        //    var folderName = Path.Combine("Resources", "ProfilePics");
+        //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+        //    if (!Directory.Exists(filePath))
+        //    {
+        //        Directory.CreateDirectory(filePath);
+        //    }
+
+        //    var uniqueFileName = $"{userId}_profilepic.png";
+        //    var dbPath = Path.Combine(folderName, uniqueFileName);
+
+        //    using (var fileStream = new FileStream(Path.Combine(filePath, uniqueFileName), FileMode.Create))
+        //    {
+        //        await file.CopyToAsync(fileStream);
+        //    }
+
+        //    return dbPath;
+        //}
     }
 }
